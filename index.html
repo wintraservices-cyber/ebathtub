@@ -1,0 +1,2780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eBathtub — The Sanctuary Collective</title>
+<meta name="description" content="The world's finest bathroom sanctuaries. Curated high-ticket bathroom products from the most prestigious global brands.">
+<!-- ⚠️ TEMPORARY — remove this line once the site is actually ready for
+     public/search visibility. This tells Google and other search engines
+     not to index or follow links on this page. It does NOT make the URL
+     itself private or unguessable — it only prevents the site from
+     appearing in search results. See README.md for the full pre-launch
+     checklist. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F0D0B;
+  --ink2: #1C1916;
+  --ink3: #2A2520;
+  --gold: #B8966A;
+  --gold2: #D4B48C;
+  --gold3: #EDD9B8;
+  --bone: #F2EDE4;
+  --bone2: #FAF7F2;
+  --stone: #7A6E64;
+  --stone2: #A89E94;
+  --stone3: #C8BEB4;
+  --sage: #6B8472;
+  --sage2: #8FA897;
+  --error: #B04040;
+  --success: #4A8060;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--font-body);background:var(--ink);color:var(--bone);overflow-x:hidden;cursor:none;}
+
+/* ─── CURSOR ─────────────────────────────────────────── */
+#cur{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s var(--ease);}
+#cur-ring{position:fixed;width:28px;height:28px;border:1px solid rgba(184,150,106,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s var(--ease);}
+body:hover #cur-ring{opacity:1;}
+
+/* ─── UTILITY ─────────────────────────────────────────── */
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font-family:var(--font-body);cursor:none;border:none;background:none;}
+
+/* ─── IMAGE PLACEHOLDER SYSTEM ────────────────────────────
+   Every product/category visual is built from a real <img> tag
+   pointing at data-img-slot (currently a styled placeholder via
+   onerror fallback). The moment you have an approved affiliate
+   image URL, set it on the <img src="..."> and the placeholder
+   styling disappears automatically — zero markup changes needed. */
+.media-frame{
+  position:absolute;inset:0;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.media-frame img{
+  width:100%;height:100%;object-fit:cover;
+  position:relative;z-index:2;
+}
+.media-ph{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:
+    repeating-linear-gradient(135deg, rgba(184,150,106,.025) 0px, rgba(184,150,106,.025) 1px, transparent 1px, transparent 14px);
+}
+.media-ph-mono{
+  font-family:var(--font-display);font-style:italic;font-weight:400;
+  color:rgba(184,150,106,.32);
+  line-height:1;letter-spacing:.02em;
+  -webkit-text-stroke:.5px rgba(184,150,106,.4);
+}
+.media-ph-label{
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(184,150,106,.4);
+}
+.media-ph-frame{
+  position:absolute;inset:18px;border:1px solid rgba(184,150,106,.14);
+  pointer-events:none;
+}
+.media-ph-corner{position:absolute;width:14px;height:14px;}
+.media-ph-corner.tl{top:14px;left:14px;border-top:1px solid rgba(184,150,106,.5);border-left:1px solid rgba(184,150,106,.5);}
+.media-ph-corner.br{bottom:14px;right:14px;border-bottom:1px solid rgba(184,150,106,.5);border-right:1px solid rgba(184,150,106,.5);}
+
+/* ─── LEGAL PAGES ──────────────────────────────────────── */
+.legal-wrap{padding-top:72px;min-height:100vh;}
+.legal-hero{
+  padding:90px 60px 50px;
+  border-bottom:1px solid rgba(184,150,106,.1);
+  background:linear-gradient(160deg, var(--ink) 0%, var(--ink2) 100%);
+}
+.legal-updated{font-size:.7rem;color:var(--stone);letter-spacing:.08em;margin-top:14px;}
+.legal-body{
+  max-width:760px;margin:0 auto;padding:64px 60px 100px;
+}
+.legal-toc{
+  background:var(--ink2);border:1px solid rgba(184,150,106,.12);
+  padding:28px 32px;margin-bottom:56px;
+}
+.legal-toc-h{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.legal-toc a{
+  display:block;font-size:.84rem;color:var(--stone2);padding:7px 0;
+  cursor:none;transition:color .25s;font-weight:200;
+}
+.legal-toc a:hover{color:var(--gold2);}
+.legal-section{margin-bottom:48px;}
+.legal-section h2{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:500;
+  color:var(--bone2);margin-bottom:18px;padding-top:8px;
+  scroll-margin-top:100px;
+}
+.legal-section h3{
+  font-family:var(--font-display);font-size:1.1rem;font-weight:500;
+  color:var(--gold2);margin:24px 0 12px;
+}
+.legal-section p{
+  font-size:.9rem;line-height:1.85;color:var(--stone2);font-weight:200;
+  margin-bottom:16px;
+}
+.legal-section ul{margin:0 0 16px 0;padding-left:0;list-style:none;}
+.legal-section li{
+  font-size:.9rem;line-height:1.8;color:var(--stone2);font-weight:200;
+  padding-left:22px;position:relative;margin-bottom:10px;
+}
+.legal-section li::before{
+  content:'—';position:absolute;left:0;color:var(--gold);
+}
+.legal-placeholder{
+  color:var(--gold2);background:rgba(184,150,106,.1);
+  padding:2px 8px;border-radius:2px;font-weight:400;
+  border:1px dashed rgba(184,150,106,.4);
+}
+.legal-callout{
+  background:rgba(184,150,106,.06);border-left:2px solid var(--gold);
+  padding:20px 24px;margin:24px 0;
+}
+.legal-callout p{margin-bottom:0;color:var(--bone2);}
+.legal-divider{height:1px;background:rgba(184,150,106,.1);margin:56px 0 48px;}
+.legal-cross-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:40px;}
+.legal-cross-links a{
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--stone2);border-bottom:1px solid rgba(184,150,106,.2);
+  padding-bottom:4px;cursor:none;transition:color .3s,border-color .3s;
+}
+.legal-cross-links a:hover{color:var(--gold2);border-color:var(--gold);}
+@media(max-width:768px){
+  .legal-hero{padding:80px 24px 40px;}
+  .legal-body{padding:48px 24px 70px;}
+}
+
+/* ─── ARTICLE STUDIO (AI GENERATOR) ───────────────────────
+   Generate-then-review-then-publish workflow: drafts are
+   stored in-memory only and require explicit "Publish" before
+   they appear in the public Journal list. */
+.studio-toggle{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(184,150,106,.08);border:1px solid rgba(184,150,106,.25);
+  color:var(--gold2);padding:10px 20px;font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;cursor:none;transition:all .25s;margin-bottom:32px;
+}
+.studio-toggle:hover{background:rgba(184,150,106,.14);}
+.studio-panel{
+  background:var(--ink2);border:1px solid rgba(184,150,106,.15);
+  padding:36px;margin-bottom:48px;display:none;
+}
+.studio-panel.open{display:block;animation:fadeIn .3s forwards;}
+.studio-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+.studio-title{font-family:var(--font-display);font-size:1.4rem;font-weight:400;}
+.studio-title em{font-style:italic;color:var(--gold2);}
+.studio-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
+.studio-form .c-group.full{grid-column:1/-1;}
+.studio-actions{display:flex;gap:12px;align-items:center;}
+.btn-studio-gen{
+  background:var(--gold);color:var(--ink);border:none;padding:14px 30px;
+  font-size:.76rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  cursor:none;transition:all .3s;display:flex;align-items:center;gap:10px;
+}
+.btn-studio-gen:hover{background:var(--gold2);transform:translateY(-2px);}
+.btn-studio-gen:disabled{opacity:.5;cursor:not-allowed;}
+.studio-spinner{width:13px;height:13px;border:2px solid transparent;border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.studio-gen-loading .studio-spinner{display:block;}
+.studio-gen-loading .studio-btn-label{display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.drafts-list{display:flex;flex-direction:column;gap:2px;margin-top:8px;}
+.draft-row{
+  background:var(--ink2);border:1px solid rgba(184,150,106,.1);
+  padding:18px 22px;display:grid;grid-template-columns:auto 1fr auto auto;gap:18px;
+  align-items:center;transition:border-color .2s;
+}
+.draft-row:hover{border-color:rgba(184,150,106,.25);}
+.draft-status{
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 10px;border:1px solid;white-space:nowrap;
+}
+.draft-status.draft{color:var(--gold);border-color:rgba(184,150,106,.3);background:rgba(184,150,106,.06);}
+.draft-status.published{color:var(--sage2);border-color:rgba(123,158,135,.3);background:rgba(123,158,135,.06);}
+.draft-title{font-size:.88rem;color:var(--bone2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.draft-meta{font-size:.68rem;color:var(--stone);margin-top:3px;}
+.draft-actions{display:flex;gap:8px;}
+.draft-btn{
+  padding:8px 16px;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  cursor:none;transition:all .2s;font-family:var(--font-body);white-space:nowrap;
+}
+.draft-btn-review{border:1px solid rgba(184,150,106,.3);color:var(--stone3);}
+.draft-btn-review:hover{border-color:var(--gold);color:var(--gold);}
+.draft-btn-publish{background:var(--sage);color:var(--ink);border:none;}
+.draft-btn-publish:hover{background:var(--sage2);}
+.draft-btn-delete{border:1px solid rgba(176,64,64,.3);color:#D08080;}
+.draft-btn-delete:hover{border-color:var(--error);background:rgba(176,64,64,.08);}
+
+/* Review Modal */
+.review-modal-bg{
+  position:fixed;inset:0;background:rgba(15,13,11,.85);z-index:500;
+  display:none;align-items:center;justify-content:center;padding:40px;
+  backdrop-filter:blur(4px);
+}
+.review-modal-bg.open{display:flex;animation:fadeIn .25s forwards;}
+.review-modal{
+  background:var(--ink2);border:1px solid rgba(184,150,106,.2);
+  max-width:760px;width:100%;max-height:85vh;overflow-y:auto;
+  padding:48px;position:relative;
+}
+.review-modal-close{
+  position:absolute;top:24px;right:24px;width:36px;height:36px;
+  border:1px solid rgba(184,150,106,.2);display:flex;align-items:center;justify-content:center;
+  cursor:none;color:var(--stone2);transition:all .2s;
+}
+.review-modal-close:hover{border-color:var(--gold);color:var(--gold);}
+.review-ai-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+  background:rgba(184,150,106,.08);border:1px solid rgba(184,150,106,.2);
+  padding:6px 14px;margin-bottom:24px;
+}
+.review-title{font-family:var(--font-display);font-size:1.8rem;font-weight:400;line-height:1.2;margin-bottom:20px;padding-right:40px;}
+.review-content{
+  font-size:.9rem;line-height:1.85;color:var(--stone2);font-weight:200;
+  white-space:pre-line;margin-bottom:32px;
+}
+.review-content strong{color:var(--bone2);font-weight:500;}
+.review-modal-actions{display:flex;gap:12px;padding-top:24px;border-top:1px solid rgba(184,150,106,.1);}
+
+/* ─── ARTICLE READER PAGE ─────────────────────────────────── */
+.article-hero{
+  padding:110px 60px 60px;
+  background:linear-gradient(160deg, var(--ink) 0%, var(--ink2) 100%);
+  border-bottom:1px solid rgba(184,150,106,.1);
+}
+.article-body-wrap{max-width:720px;margin:0 auto;padding:56px 60px 100px;}
+.article-meta-row{display:flex;gap:20px;align-items:center;margin-bottom:24px;font-size:.74rem;color:var(--stone2);}
+.article-ai-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);
+  border:1px solid rgba(184,150,106,.25);padding:4px 10px;
+}
+.article-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:400;line-height:1.15;margin-bottom:18px;}
+.article-content{font-size:1rem;line-height:1.9;color:var(--stone2);font-weight:200;white-space:pre-line;}
+.article-content strong{color:var(--bone2);font-weight:500;}
+@media(max-width:768px){
+  .article-hero{padding:90px 24px 40px;}
+  .article-body-wrap{padding:40px 24px 70px;}
+  .studio-form{grid-template-columns:1fr;}
+  .draft-row{grid-template-columns:1fr;gap:10px;}
+}
+
+/* ─── STUDIO ACCESS GATE ───────────────────────────────────
+   Client-side deterrent only — not real server auth. Requires
+   both a secret URL query param AND a password to reveal the
+   Article Studio panel and its toggle button. */
+.studio-gate-bg{
+  position:fixed;inset:0;background:rgba(15,13,11,.92);z-index:600;
+  display:none;align-items:center;justify-content:center;padding:40px;
+  backdrop-filter:blur(6px);
+}
+.studio-gate-bg.open{display:flex;animation:fadeIn .25s forwards;}
+.studio-gate-box{
+  background:var(--ink2);border:1px solid rgba(184,150,106,.25);
+  max-width:380px;width:100%;padding:44px 40px;text-align:center;
+}
+.studio-gate-icon{font-size:1.8rem;margin-bottom:18px;color:var(--gold);}
+.studio-gate-h{font-family:var(--font-display);font-size:1.3rem;font-weight:400;margin-bottom:10px;}
+.studio-gate-p{font-size:.78rem;color:var(--stone2);line-height:1.6;margin-bottom:24px;}
+.studio-gate-input{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(184,150,106,.2);
+  color:var(--bone);padding:13px 16px;font-family:var(--font-body);font-size:.9rem;
+  text-align:center;letter-spacing:.05em;outline:none;margin-bottom:14px;cursor:none;
+  transition:border-color .3s;
+}
+.studio-gate-input:focus{border-color:rgba(184,150,106,.5);}
+.studio-gate-error{font-size:.7rem;color:var(--error);min-height:16px;margin-bottom:10px;}
+.studio-gate-submit{
+  width:100%;background:var(--gold);color:var(--ink);border:none;padding:13px;
+  font-size:.76rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  cursor:none;transition:all .3s;
+}
+.studio-gate-submit:hover{background:var(--gold2);}
+.studio-lock-banner{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(123,158,135,.08);border:1px solid rgba(123,158,135,.25);
+  color:var(--sage2);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:10px 18px;margin-bottom:24px;
+}
+
+/* ─── SCROLLBAR ───────────────────────────────────────── */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--ink);}
+::-webkit-scrollbar-thumb{background:rgba(184,150,106,.3);border-radius:2px;}
+
+/* ─── PAGE SYSTEM ─────────────────────────────────────── */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* ─── NAVBAR ──────────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:72px;
+  transition:background .4s,border-color .4s,backdrop-filter .4s;
+}
+#nav.scrolled{
+  background:rgba(15,13,11,.9);
+  border-bottom:1px solid rgba(184,150,106,.12);
+  backdrop-filter:blur(12px);
+}
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:1.5rem;font-weight:400;
+  letter-spacing:.04em;
+  color:var(--gold2);
+  cursor:none;
+}
+.nav-logo sub{font-size:.55em;vertical-align:baseline;color:var(--stone2);font-family:var(--font-body);font-weight:300;letter-spacing:.15em;}
+.nav-center{display:flex;gap:40px;align-items:center;}
+.nav-link{
+  font-size:.72rem;font-weight:300;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--stone3);transition:color .3s;cursor:none;position:relative;
+}
+.nav-link::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease);}
+.nav-link:hover{color:var(--gold2);}
+.nav-link:hover::after,.nav-link.active::after{width:100%;}
+.nav-link.active{color:var(--gold2);}
+.nav-right{display:flex;gap:12px;align-items:center;}
+.nav-icon-btn{
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(184,150,106,.18);color:var(--stone3);
+  transition:all .3s;cursor:none;font-size:1rem;
+}
+.nav-icon-btn:hover{border-color:var(--gold);color:var(--gold);}
+.nav-cta{
+  background:var(--gold);color:var(--ink);
+  padding:9px 22px;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  transition:all .3s;cursor:none;
+}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 6px 24px rgba(184,150,106,.25);}
+
+/* ─── MOBILE MENU ─────────────────────────────────────── */
+.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:none;padding:4px;}
+.menu-toggle span{display:block;width:22px;height:1px;background:var(--stone3);transition:all .3s;}
+.mobile-menu{
+  position:fixed;inset:0;z-index:190;
+  background:var(--ink2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+}
+.mobile-menu.open{opacity:1;pointer-events:all;}
+.mobile-nav-link{font-family:var(--font-display);font-size:2.4rem;font-weight:400;color:var(--stone2);transition:color .3s;cursor:none;}
+.mobile-nav-link:hover{color:var(--gold2);}
+
+/* ─── HERO ────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;position:relative;
+  display:grid;grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:140px 60px 80px;
+  position:relative;z-index:2;
+}
+.hero-right{
+  position:relative;overflow:hidden;
+}
+.hero-bg-art{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 120% 80% at 80% 60%, rgba(184,150,106,.07) 0%, transparent 60%),
+    linear-gradient(160deg, var(--ink) 0%, #1A1410 100%);
+}
+.hero-grid-lines{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(184,150,106,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,150,106,.04) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-visual{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg, #1E1610 0%, #0D0B09 100%);
+  overflow:hidden;
+}
+.hero-visual-inner{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18rem;
+  opacity:.07;
+  filter:blur(2px);
+  animation:floatY 8s ease-in-out infinite;
+}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+.hero-overlay-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(to right, var(--ink) 0%, transparent 30%),
+             linear-gradient(to top, rgba(15,13,11,.7) 0%, transparent 50%);
+}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:28px;
+  opacity:0;animation:riseIn .8s .2s var(--ease-out) forwards;
+}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero-h1{
+  font-family:var(--font-display);
+  font-size:clamp(3.2rem,5.5vw,5.8rem);
+  font-weight:400;line-height:1.04;letter-spacing:-.01em;
+  margin-bottom:32px;
+  opacity:0;animation:riseIn .9s .4s var(--ease-out) forwards;
+}
+.hero-h1 em{font-style:italic;color:var(--gold2);}
+.hero-h1 .outline{
+  -webkit-text-stroke:1px rgba(184,150,106,.4);
+  color:transparent;
+}
+.hero-desc{
+  font-size:1rem;font-weight:200;line-height:1.75;
+  color:var(--stone2);max-width:400px;margin-bottom:48px;
+  opacity:0;animation:riseIn .9s .6s var(--ease-out) forwards;
+}
+.hero-ctas{
+  display:flex;gap:14px;flex-wrap:wrap;
+  opacity:0;animation:riseIn .9s .8s var(--ease-out) forwards;
+}
+.btn-gold{
+  background:var(--gold);color:var(--ink);
+  padding:15px 38px;font-size:.75rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:all .3s var(--ease);position:relative;overflow:hidden;cursor:none;
+}
+.btn-gold::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:translateX(-101%);transition:transform .35s var(--ease);}
+.btn-gold:hover::before{transform:translateX(0);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,150,106,.3);}
+.btn-ghost{
+  background:transparent;color:var(--bone);
+  border:1px solid rgba(200,190,180,.22);
+  padding:15px 38px;font-size:.75rem;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:all .3s;cursor:none;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+
+.hero-numbers{
+  position:absolute;bottom:48px;right:60px;
+  display:flex;gap:40px;z-index:3;
+  opacity:0;animation:riseIn .9s 1s var(--ease-out) forwards;
+}
+.hero-num-item{text-align:center;}
+.hero-num{font-family:var(--font-display);font-size:2.2rem;font-weight:400;color:var(--gold2);line-height:1;}
+.hero-num-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-top:6px;}
+
+.hero-scroll{
+  position:absolute;bottom:48px;left:60px;
+  display:flex;align-items:center;gap:10px;
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);
+  opacity:0;animation:riseIn 1s 1.2s forwards;z-index:3;
+}
+.hero-scroll-line{width:40px;height:1px;background:var(--stone);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:.3;width:40px;}50%{opacity:1;width:60px;}}
+
+@keyframes riseIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── MARQUEE ─────────────────────────────────────────── */
+.marquee-bar{
+  overflow:hidden;border-top:1px solid rgba(184,150,106,.1);border-bottom:1px solid rgba(184,150,106,.1);
+  padding:14px 0;background:rgba(184,150,106,.02);
+}
+.marquee-track{display:flex;gap:0;white-space:nowrap;animation:mq 35s linear infinite;}
+.marquee-track:hover{animation-play-state:paused;}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:56px;padding:0 28px;
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--stone);
+}
+.marquee-item::after{content:'✦';color:rgba(184,150,106,.4);font-size:.4rem;}
+@keyframes mq{to{transform:translateX(-50%);}}
+
+/* ─── SECTION SHELL ───────────────────────────────────── */
+.section{padding:110px 60px;}
+.section-sm{padding:70px 60px;}
+.section-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:18px;
+}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--gold);}
+.section-h{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,3.5vw,3.2rem);font-weight:400;line-height:1.1;
+}
+.section-h em{font-style:italic;color:var(--gold2);}
+
+/* ─── FEATURED CATEGORIES ─────────────────────────────── */
+.cats-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:3px;margin-top:56px;}
+.cat-card{
+  position:relative;overflow:hidden;cursor:none;
+  background:var(--ink3);
+  transition:transform .5s var(--ease);
+}
+.cat-card:hover{z-index:2;}
+.cat-card:nth-child(1){grid-row:1/3;min-height:580px;}
+.cat-card:nth-child(2),.cat-card:nth-child(3),.cat-card:nth-child(4),.cat-card:nth-child(5){min-height:282px;}
+.cat-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8rem;transition:transform .6s var(--ease),filter .6s;filter:brightness(.6);
+}
+.cat-card:hover .cat-bg{transform:scale(1.06);filter:brightness(.75);}
+.cat-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(15,13,11,.9) 0%, rgba(15,13,11,.3) 50%, transparent 100%);
+}
+.cat-card:hover .cat-overlay{background:linear-gradient(to top, rgba(15,13,11,.95) 0%, rgba(15,13,11,.5) 60%, transparent 100%);}
+.cat-content{
+  position:absolute;bottom:0;left:0;right:0;padding:28px;
+}
+.cat-tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.cat-name{font-family:var(--font-display);font-size:1.5rem;font-weight:400;line-height:1.15;margin-bottom:12px;}
+.cat-card:nth-child(1) .cat-name{font-size:2.2rem;}
+.cat-count{font-size:.7rem;color:var(--stone2);letter-spacing:.08em;}
+.cat-arrow{
+  position:absolute;top:24px;right:24px;
+  width:36px;height:36px;border:1px solid rgba(184,150,106,.25);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:.8rem;
+  transform:rotate(45deg) scale(0);
+  transition:transform .4s var(--ease-out);
+}
+.cat-card:hover .cat-arrow{transform:rotate(0) scale(1);}
+
+/* ─── PRODUCTS SECTION ────────────────────────────────── */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px;margin-top:40px;}
+.filter-btn{
+  padding:9px 20px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(184,150,106,.18);color:var(--stone2);
+  transition:all .25s;cursor:none;font-family:var(--font-body);font-weight:300;
+}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold);}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+
+.products-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+}
+.prod-card{
+  background:var(--ink2);position:relative;overflow:hidden;cursor:none;
+  transition:transform .45s var(--ease);
+}
+.prod-card:hover{z-index:2;transform:scale(1.02);}
+.prod-vis{
+  aspect-ratio:3/4;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  font-size:5.5rem;
+}
+.prod-vis-bg{position:absolute;inset:0;transition:transform .5s var(--ease);}
+.prod-card:hover .prod-vis-bg{transform:scale(1.08);}
+.prod-badge{
+  position:absolute;top:16px;left:16px;z-index:2;
+  background:var(--gold);color:var(--ink);
+  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;
+}
+.prod-wishlist{
+  position:absolute;top:16px;right:16px;z-index:2;
+  width:32px;height:32px;border:1px solid rgba(184,150,106,.3);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--stone2);font-size:.85rem;cursor:none;
+  transition:all .25s;opacity:0;
+}
+.prod-card:hover .prod-wishlist{opacity:1;}
+.prod-wishlist:hover{background:rgba(184,150,106,.1);border-color:var(--gold);color:var(--gold);}
+.prod-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(15,13,11,.92) 0%, transparent 50%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:22px;
+}
+.prod-brand{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.prod-name{font-family:var(--font-display);font-size:1.15rem;font-weight:400;line-height:1.2;margin-bottom:10px;}
+.prod-price-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.prod-price{font-size:1rem;color:var(--gold2);}
+.prod-comm{
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--sage2);background:rgba(107,132,114,.12);
+  border:1px solid rgba(107,132,114,.25);padding:3px 8px;
+}
+.prod-actions{
+  display:flex;gap:8px;
+  transform:translateY(8px);opacity:0;transition:all .3s .05s var(--ease);
+}
+.prod-card:hover .prod-actions{transform:translateY(0);opacity:1;}
+.prod-btn{
+  flex:1;padding:10px 8px;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  transition:all .2s;cursor:none;font-family:var(--font-body);
+}
+.prod-btn-primary{background:var(--gold);color:var(--ink);}
+.prod-btn-primary:hover{background:var(--gold2);}
+.prod-btn-secondary{border:1px solid rgba(200,190,180,.22);color:var(--stone3);}
+.prod-btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ─── BRAND LOGOS ─────────────────────────────────────── */
+.brands-section{
+  border-top:1px solid rgba(184,150,106,.08);
+  border-bottom:1px solid rgba(184,150,106,.08);
+  background:rgba(184,150,106,.025);
+}
+.brands-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+  margin-top:48px;
+}
+.brand-logo-cell{
+  padding:32px 24px;
+  border:1px solid rgba(184,150,106,.08);
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;transition:background .3s;
+}
+.brand-logo-cell:hover{background:rgba(184,150,106,.06);}
+.brand-name{
+  font-family:var(--font-display);
+  font-size:.95rem;font-weight:500;
+  color:var(--stone);letter-spacing:.06em;
+  transition:color .3s;
+}
+.brand-logo-cell:hover .brand-name{color:var(--gold2);}
+
+/* ─── EDITORIAL / BLOG ────────────────────────────────── */
+.editorial-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-top:56px;}
+.edit-card{cursor:none;}
+.edit-card:first-child{grid-column:1/3;}
+.edit-vis{
+  aspect-ratio:16/9;background:var(--ink3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;overflow:hidden;position:relative;margin-bottom:20px;
+  transition:transform .45s var(--ease);
+}
+.edit-card:first-child .edit-vis{aspect-ratio:16/8;}
+.edit-card:hover .edit-vis{transform:scale(1.02);}
+.edit-vis-bg{position:absolute;inset:0;background:var(--ink3);}
+.edit-vis-emoji{position:relative;z-index:2;filter:drop-shadow(0 4px 20px rgba(0,0,0,.6));}
+.edit-tag{
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.edit-tag::before{content:'';width:16px;height:1px;background:var(--gold);}
+.edit-h{
+  font-family:var(--font-display);font-size:1.35rem;font-weight:400;line-height:1.3;
+  margin-bottom:10px;color:var(--bone);
+  transition:color .3s;
+}
+.edit-card:first-child .edit-h{font-size:1.9rem;}
+.edit-card:hover .edit-h{color:var(--gold2);}
+.edit-meta{font-size:.7rem;color:var(--stone);display:flex;gap:16px;}
+
+/* ─── TESTIMONIALS ────────────────────────────────────── */
+.testimonials-bg{
+  background:var(--ink2);
+  border-top:1px solid rgba(184,150,106,.08);
+  border-bottom:1px solid rgba(184,150,106,.08);
+}
+.testi-slider{position:relative;overflow:hidden;margin-top:56px;}
+.testi-track{display:flex;transition:transform .6s var(--ease);}
+.testi-slide{min-width:100%;padding:0 15%;}
+.testi-quote{
+  font-family:var(--font-display);font-size:clamp(1.3rem,2.5vw,2rem);
+  font-weight:400;font-style:italic;line-height:1.55;
+  color:var(--bone);margin-bottom:36px;
+}
+.testi-quote .highlight{color:var(--gold2);}
+.testi-author{display:flex;align-items:center;gap:16px;}
+.testi-avatar{
+  width:50px;height:50px;border-radius:50%;
+  background:var(--ink3);border:1px solid rgba(184,150,106,.2);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+}
+.testi-info-name{font-size:.85rem;font-weight:500;color:var(--bone);margin-bottom:3px;}
+.testi-info-title{font-size:.7rem;color:var(--stone2);letter-spacing:.08em;}
+.testi-stars{color:var(--gold);font-size:.8rem;margin-bottom:20px;letter-spacing:3px;}
+.testi-dots{display:flex;gap:8px;justify-content:center;margin-top:40px;}
+.testi-dot{
+  width:24px;height:2px;background:rgba(184,150,106,.25);cursor:none;transition:all .3s;
+}
+.testi-dot.active{background:var(--gold);width:40px;}
+
+/* ─── AFFILIATE PROGRAM ───────────────────────────────── */
+.program-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:56px;}
+.program-left{
+  background:var(--ink2);border:1px solid rgba(184,150,106,.12);
+  padding:56px;position:relative;overflow:hidden;
+}
+.program-left::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle, rgba(184,150,106,.06), transparent 70%);
+}
+.program-right{padding:56px 0 56px 60px;}
+.comm-showcase{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;
+}
+.comm-card{
+  background:rgba(184,150,106,.05);border:1px solid rgba(184,150,106,.14);
+  padding:24px 20px;transition:border-color .3s,background .3s;cursor:none;
+}
+.comm-card:hover{border-color:rgba(184,150,106,.3);background:rgba(184,150,106,.09);}
+.comm-pct{
+  font-family:var(--font-display);font-size:2.4rem;font-weight:400;
+  color:var(--gold);line-height:1;margin-bottom:6px;
+}
+.comm-label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone2);}
+.program-steps{display:flex;flex-direction:column;gap:28px;}
+.prog-step{display:flex;gap:20px;align-items:flex-start;}
+.prog-num{
+  width:36px;height:36px;border:1px solid rgba(184,150,106,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:1rem;color:var(--gold);
+  flex-shrink:0;
+}
+.prog-step-h{font-size:.85rem;font-weight:500;color:var(--bone2);margin-bottom:5px;}
+.prog-step-p{font-size:.8rem;color:var(--stone2);line-height:1.65;font-weight:200;}
+
+/* ─── NEWSLETTER / WAITLIST ───────────────────────────── */
+.nl-section{
+  text-align:center;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(184,150,106,.05), transparent 70%),
+    var(--ink2);
+  border-top:1px solid rgba(184,150,106,.08);
+}
+.nl-h{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:400;margin-bottom:16px;}
+.nl-h em{font-style:italic;color:var(--gold2);}
+.nl-sub{color:var(--stone2);font-weight:200;line-height:1.7;max-width:480px;margin:0 auto 44px;}
+.nl-form{display:flex;gap:0;max-width:440px;margin:0 auto;}
+.nl-input{
+  flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(184,150,106,.2);
+  border-right:0;color:var(--bone);padding:16px 20px;font-family:var(--font-body);
+  font-size:.85rem;font-weight:300;outline:none;transition:border-color .3s;
+}
+.nl-input::placeholder{color:var(--stone);}
+.nl-input:focus{border-color:rgba(184,150,106,.5);}
+.nl-submit{
+  background:var(--gold);color:var(--ink);padding:16px 28px;
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  cursor:none;transition:all .3s;white-space:nowrap;
+}
+.nl-submit:hover{background:var(--gold2);}
+.nl-note{font-size:.65rem;color:var(--stone);margin-top:14px;letter-spacing:.06em;}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer{
+  background:var(--ink2);
+  border-top:1px solid rgba(184,150,106,.1);
+  padding:72px 60px 36px;
+}
+.footer-top{
+  display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:60px;
+  margin-bottom:60px;padding-bottom:60px;border-bottom:1px solid rgba(184,150,106,.08);
+}
+.footer-brand-desc{font-size:.82rem;color:var(--stone2);line-height:1.75;font-weight:200;margin-top:16px;max-width:280px;}
+.footer-col-h{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.footer-links{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:.8rem;color:var(--stone2);transition:color .3s;cursor:none;font-weight:200;}
+.footer-link:hover{color:var(--gold2);}
+.footer-social{display:flex;gap:10px;margin-top:24px;}
+.social-btn{
+  width:36px;height:36px;border:1px solid rgba(184,150,106,.18);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:var(--stone2);transition:all .3s;cursor:none;
+}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-copy{font-size:.7rem;color:var(--stone);letter-spacing:.06em;}
+.footer-legal{display:flex;gap:24px;}
+.footer-legal a{font-size:.68rem;color:var(--stone);transition:color .3s;cursor:none;}
+.footer-legal a:hover{color:var(--gold2);}
+
+/* ─── PRODUCT PAGE ────────────────────────────────────── */
+.product-detail{padding-top:88px;min-height:100vh;}
+.pd-hero{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  min-height:calc(100vh - 88px);
+}
+.pd-vis-col{
+  position:sticky;top:72px;align-self:start;height:calc(100vh - 88px);
+  background:var(--ink3);display:flex;align-items:center;justify-content:center;
+  font-size:14rem;position:relative;overflow:hidden;
+}
+.pd-vis-bg{position:absolute;inset:0;}
+.pd-vis-emoji{position:relative;z-index:2;filter:drop-shadow(0 8px 40px rgba(0,0,0,.6));animation:floatY 6s ease-in-out infinite;}
+.pd-vis-thumbs{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;z-index:3;
+}
+.pd-thumb{
+  width:48px;height:48px;border:1px solid rgba(184,150,106,.2);
+  background:rgba(15,13,11,.6);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  cursor:none;transition:border-color .3s;
+}
+.pd-thumb.active,.pd-thumb:hover{border-color:var(--gold);}
+.pd-info-col{padding:56px 64px;overflow-y:auto;max-height:calc(100vh - 88px);}
+.pd-breadcrumb{display:flex;gap:8px;align-items:center;font-size:.68rem;color:var(--stone);letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px;}
+.pd-breadcrumb span{color:rgba(184,150,106,.4);}
+.pd-breadcrumb a{cursor:none;transition:color .3s;}
+.pd-breadcrumb a:hover{color:var(--gold2);}
+.pd-brand-tag{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.pd-h{font-family:var(--font-display);font-size:2.4rem;font-weight:400;line-height:1.15;margin-bottom:10px;}
+.pd-model{font-size:.75rem;color:var(--stone2);letter-spacing:.1em;margin-bottom:20px;}
+.pd-rating{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.pd-stars{color:var(--gold);letter-spacing:2px;}
+.pd-rating-txt{font-size:.75rem;color:var(--stone2);}
+.pd-price-block{
+  background:rgba(184,150,106,.05);border:1px solid rgba(184,150,106,.14);
+  padding:24px;margin-bottom:28px;
+}
+.pd-price{font-family:var(--font-display);font-size:2.2rem;font-weight:400;color:var(--gold2);margin-bottom:4px;}
+.pd-comm-note{font-size:.72rem;color:var(--sage2);display:flex;align-items:center;gap:6px;}
+.pd-comm-note::before{content:'✓';font-weight:700;}
+.pd-specs{margin-bottom:32px;}
+.pd-spec-row{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(184,150,106,.07);}
+.pd-spec-key{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);width:140px;flex-shrink:0;}
+.pd-spec-val{font-size:.82rem;color:var(--bone2);font-weight:200;}
+.pd-desc{font-size:.88rem;color:var(--stone2);line-height:1.8;font-weight:200;margin-bottom:32px;}
+.pd-ctas{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.pd-btn-shop{
+  background:var(--gold);color:var(--ink);padding:17px;text-align:center;
+  font-size:.8rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  cursor:none;transition:all .3s;
+}
+.pd-btn-shop:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(184,150,106,.25);}
+.pd-btn-compare{
+  border:1px solid rgba(184,150,106,.22);color:var(--stone2);
+  padding:17px;text-align:center;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  cursor:none;transition:all .3s;
+}
+.pd-btn-compare:hover{border-color:var(--gold);color:var(--gold);}
+.pd-trust{display:flex;gap:20px;flex-wrap:wrap;}
+.pd-trust-item{display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--stone2);}
+.pd-trust-icon{color:var(--gold);}
+
+/* ─── ABOUT PAGE ──────────────────────────────────────── */
+.about-hero{
+  min-height:60vh;display:flex;align-items:flex-end;
+  padding:120px 60px 80px;
+  background:linear-gradient(160deg, var(--ink) 40%, var(--ink2) 100%);
+  position:relative;overflow:hidden;
+}
+.about-hero::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, rgba(184,150,106,.04), transparent 70%);
+}
+.about-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;}
+.about-h{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,5rem);font-weight:400;line-height:1.05;}
+.about-h em{font-style:italic;color:var(--gold2);}
+.about-lead{font-size:1.05rem;font-weight:200;line-height:1.8;color:var(--stone2);}
+.about-values{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.value-card{background:var(--ink2);padding:40px 32px;border:1px solid rgba(184,150,106,.08);transition:border-color .3s;cursor:none;}
+.value-card:hover{border-color:rgba(184,150,106,.25);}
+.value-icon{font-size:2rem;margin-bottom:20px;}
+.value-h{font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:10px;}
+.value-p{font-size:.82rem;color:var(--stone2);line-height:1.7;font-weight:200;}
+.about-mission{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:3px;
+}
+.mission-left{
+  background:var(--gold);color:var(--ink);padding:72px 56px;
+}
+.mission-h{font-family:var(--font-display);font-size:2.2rem;font-weight:400;line-height:1.15;margin-bottom:20px;}
+.mission-p{font-size:.88rem;line-height:1.8;color:rgba(15,13,11,.75);}
+.mission-right{background:var(--ink2);padding:72px 56px;}
+.mission-stats{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.ms-num{font-family:var(--font-display);font-size:3rem;font-weight:400;color:var(--gold2);line-height:1;}
+.ms-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone2);margin-top:6px;}
+
+/* ─── CONTACT PAGE ────────────────────────────────────── */
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 72px);
+  padding-top:72px;
+}
+.contact-left{
+  background:var(--ink2);padding:80px 60px;
+  border-right:1px solid rgba(184,150,106,.08);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.contact-right{padding:80px 60px;display:flex;flex-direction:column;justify-content:center;}
+.contact-h{font-family:var(--font-display);font-size:clamp(2rem,3vw,3rem);font-weight:400;margin-bottom:12px;}
+.contact-h em{font-style:italic;color:var(--gold2);}
+.contact-sub{color:var(--stone2);font-weight:200;line-height:1.7;margin-bottom:48px;}
+.contact-info-items{display:flex;flex-direction:column;gap:28px;}
+.ci-item{display:flex;gap:18px;align-items:flex-start;}
+.ci-icon{
+  width:44px;height:44px;border:1px solid rgba(184,150,106,.2);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  flex-shrink:0;color:var(--gold);
+}
+.ci-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:5px;}
+.ci-val{font-size:.88rem;color:var(--bone2);font-weight:300;}
+.c-form{display:flex;flex-direction:column;gap:16px;}
+.c-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.c-group{display:flex;flex-direction:column;gap:8px;}
+.c-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);}
+.c-input,.c-textarea,.c-select{
+  background:rgba(255,255,255,.03);border:1px solid rgba(184,150,106,.15);
+  color:var(--bone);padding:13px 16px;font-family:var(--font-body);font-size:.85rem;font-weight:200;
+  outline:none;transition:border-color .3s;cursor:none;
+}
+.c-input:focus,.c-textarea:focus,.c-select:focus{border-color:rgba(184,150,106,.5);}
+.c-textarea{resize:vertical;min-height:110px;}
+.c-select option{background:var(--ink2);}
+.c-submit{
+  background:var(--gold);color:var(--ink);padding:16px;
+  font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  cursor:none;transition:all .3s;margin-top:4px;
+}
+.c-submit:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* ─── TOAST ───────────────────────────────────────────── */
+#toast{
+  position:fixed;bottom:28px;right:28px;z-index:9000;
+  min-width:260px;background:var(--ink2);
+  border-left:3px solid var(--gold);
+  border:1px solid rgba(184,150,106,.22);border-left:3px solid var(--gold);
+  padding:16px 20px;
+  transform:translateX(120%);transition:transform .4s var(--ease-out);
+}
+#toast.show{transform:translateX(0);}
+#toast-title{font-size:.82rem;font-weight:500;margin-bottom:3px;}
+#toast-msg{font-size:.73rem;color:var(--stone2);}
+
+/* ─── ANIMATIONS ──────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{padding:140px 40px 80px;}
+  .cats-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .cats-grid .cat-card:nth-child(1){grid-row:auto;}
+  .products-grid{grid-template-columns:repeat(3,1fr);}
+  .brands-grid{grid-template-columns:repeat(3,1fr);}
+  .editorial-grid{grid-template-columns:1fr 1fr;}
+  .editorial-grid .edit-card:first-child{grid-column:1/3;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
+  .pd-hero{grid-template-columns:1fr;}
+  .pd-vis-col{height:50vw;position:relative;top:0;}
+  .about-values{grid-template-columns:1fr 1fr;}
+  .about-mission{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  #nav{padding:0 24px;}
+  .nav-center,.nav-cta{display:none;}
+  .menu-toggle{display:flex;}
+  .section,.section-sm{padding:70px 24px;}
+  .hero-left{padding:120px 24px 60px;}
+  .hero-h1{font-size:2.6rem;}
+  .hero-ctas{flex-direction:column;}
+  .cats-grid{grid-template-columns:1fr;}
+  .products-grid{grid-template-columns:1fr 1fr;}
+  .brands-grid{grid-template-columns:repeat(2,1fr);}
+  .editorial-grid{grid-template-columns:1fr;}
+  .editorial-grid .edit-card:first-child{grid-column:auto;}
+  .program-grid{grid-template-columns:1fr;}
+  .program-left,.program-right{padding:36px 24px;}
+  .footer-top{grid-template-columns:1fr;}
+  .about-hero-grid{grid-template-columns:1fr;}
+  .about-values{grid-template-columns:1fr;}
+  .contact-wrap{grid-template-columns:1fr;}
+  .c-row{grid-template-columns:1fr;}
+  .comm-showcase{grid-template-columns:1fr 1fr;}
+  .testi-slide{padding:0 5%;}
+  footer{padding:48px 24px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- TOAST -->
+<div id="toast"><div id="toast-title"></div><div id="toast-msg"></div></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo" onclick="navigate('home')" style="cursor:none">e<span style="color:var(--bone2)">Bathtub</span><sub>.com</sub></div>
+  <div class="nav-center">
+    <a class="nav-link active" onclick="navigate('home')" id="nl-home">Home</a>
+    <a class="nav-link" onclick="navigate('shop')" id="nl-shop">Shop</a>
+    <a class="nav-link" onclick="navigate('brands')">Brands</a>
+    <a class="nav-link" onclick="navigate('editorial')" id="nl-editorial">Editorial</a>
+    <a class="nav-link" onclick="navigate('about')" id="nl-about">About</a>
+    <a class="nav-link" onclick="navigate('contact')" id="nl-contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-icon-btn" onclick="showToast('Search','Use the search bar to find products.')" title="Search">🔍</button>
+    <button class="nav-icon-btn" onclick="showToast('Wishlist','Your wishlist is empty.')" title="Wishlist">♡</button>
+    <button class="nav-cta" onclick="navigate('affiliate')">Affiliate Portal</button>
+  </div>
+  <button class="menu-toggle" id="menu-toggle" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a class="mobile-nav-link" onclick="navigate('home');toggleMobileMenu()">Home</a>
+  <a class="mobile-nav-link" onclick="navigate('shop');toggleMobileMenu()">Shop</a>
+  <a class="mobile-nav-link" onclick="navigate('editorial');toggleMobileMenu()">Editorial</a>
+  <a class="mobile-nav-link" onclick="navigate('about');toggleMobileMenu()">About</a>
+  <a class="mobile-nav-link" onclick="navigate('contact');toggleMobileMenu()">Contact</a>
+  <a class="mobile-nav-link" onclick="navigate('affiliate');toggleMobileMenu()">Affiliate</a>
+</div>
+
+<!-- ══════════════════════ HOME PAGE ══════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bg-art"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-left">
+      <div class="hero-tag">The Sanctuary Collective</div>
+      <h1 class="hero-h1">Where <em>Luxury</em><br>Meets <span class="outline">Ritual</span></h1>
+      <p class="hero-desc">Curated high-ticket bathroom products from the world's most prestigious brands — Kohler, Bain Ultra, Victoria + Albert, Duravit, and beyond.</p>
+      <div class="hero-ctas">
+        <button class="btn-gold" onclick="navigate('shop')">Explore Collection</button>
+        <button class="btn-ghost" onclick="navigate('affiliate')">Become an Affiliate</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="media-frame">
+          <img src="https://images.unsplash.com/photo-1753605788101-04d1e653e74a?fm=jpg&q=80&w=1600&auto=format&fit=crop" alt="Luxury bathroom sanctuary" loading="lazy" onerror="this.style.display='none'">
+          <div class="media-ph">
+            <div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div>
+            <div class="media-ph-mono" style="font-size:6rem">eB</div>
+            <div class="media-ph-label">Hero Image Slot</div>
+          </div>
+        </div>
+        <div class="hero-overlay-grad"></div>
+      </div>
+    </div>
+    <div class="hero-numbers">
+      <div class="hero-num-item"><div class="hero-num">340+</div><div class="hero-num-label">Products</div></div>
+      <div class="hero-num-item"><div class="hero-num">48</div><div class="hero-num-label">Brands</div></div>
+      <div class="hero-num-item"><div class="hero-num">15%</div><div class="hero-num-label">Max Commission</div></div>
+    </div>
+    <div class="hero-scroll"><div class="hero-scroll-line"></div>Scroll to explore</div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <div class="marquee-item">Kohler</div><div class="marquee-item">Bain Ultra</div>
+      <div class="marquee-item">Victoria + Albert</div><div class="marquee-item">Duravit</div>
+      <div class="marquee-item">Grohe</div><div class="marquee-item">MTI Baths</div>
+      <div class="marquee-item">Americh</div><div class="marquee-item">Neptune</div>
+      <div class="marquee-item">Jason International</div><div class="marquee-item">Hydro Systems</div>
+      <div class="marquee-item">Kohler</div><div class="marquee-item">Bain Ultra</div>
+      <div class="marquee-item">Victoria + Albert</div><div class="marquee-item">Duravit</div>
+      <div class="marquee-item">Grohe</div><div class="marquee-item">MTI Baths</div>
+      <div class="marquee-item">Americh</div><div class="marquee-item">Neptune</div>
+      <div class="marquee-item">Jason International</div><div class="marquee-item">Hydro Systems</div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <section class="section">
+    <div class="section-tag reveal">Shop by Category</div>
+    <h2 class="section-h reveal reveal-delay-1">Curate Your <em>Sanctuary</em></h2>
+    <div class="cats-grid">
+      <div class="cat-card reveal" onclick="navigate('shop')">
+        <div class="media-frame">
+          <img src="https://images.unsplash.com/photo-1753605788101-04d1e653e74a?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Freestanding Bathtubs" loading="lazy" onerror="this.style.display='none'">
+          <div class="media-ph"><div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div><div class="media-ph-mono" style="font-size:3.5rem">FB</div></div>
+        </div>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <div class="cat-tag">Featured Category</div>
+          <div class="cat-name">Freestanding<br>Bathtubs</div>
+          <div class="cat-count">84 products · up to 12% commission</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-1" onclick="navigate('shop')">
+        <div class="media-frame">
+          <img src="https://images.unsplash.com/photo-1668910224571-8ee63c306d89?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Luxury Shower Systems" loading="lazy" onerror="this.style.display='none'">
+          <div class="media-ph"><div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div><div class="media-ph-mono" style="font-size:3rem">SS</div></div>
+        </div>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <div class="cat-tag">High Performance</div>
+          <div class="cat-name">Luxury Shower Systems</div>
+          <div class="cat-count">62 products</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2" onclick="navigate('shop')">
+        <div class="media-frame">
+          <img src="https://images.unsplash.com/photo-1682888818696-906287d759f5?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Designer Vanities" loading="lazy" onerror="this.style.display='none'">
+          <div class="media-ph"><div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div><div class="media-ph-mono" style="font-size:3rem">DV</div></div>
+        </div>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <div class="cat-tag">Statement Pieces</div>
+          <div class="cat-name">Designer Vanities</div>
+          <div class="cat-count">91 products</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-1" onclick="navigate('shop')">
+        <div class="media-frame">
+          <img src="https://images.unsplash.com/photo-1778331246390-2b91f56864e4?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Steam & Spa Systems" loading="lazy" onerror="this.style.display='none'">
+          <div class="media-ph"><div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div><div class="media-ph-mono" style="font-size:3rem">SP</div></div>
+        </div>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <div class="cat-tag">Wellness</div>
+          <div class="cat-name">Steam & Spa Systems</div>
+          <div class="cat-count">47 products</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2" onclick="navigate('shop')">
+        <div class="media-frame">
+          <img src="" alt="Smart Bathroom Tech" loading="lazy" onerror="this.style.display='none'">
+          <div class="media-ph"><div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div><div class="media-ph-mono" style="font-size:3rem">ST</div></div>
+        </div>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <div class="cat-tag">Innovation</div>
+          <div class="cat-name">Smart Bathroom Tech</div>
+          <div class="cat-count">56 products</div>
+        </div>
+        <div class="cat-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section" style="padding-top:0">
+    <div class="section-tag reveal">Editors' Picks</div>
+    <h2 class="section-h reveal reveal-delay-1">Top <em>Commission</em> Products</h2>
+    <div class="filter-bar reveal reveal-delay-2">
+      <button class="filter-btn active" onclick="filterProducts(this,'all')">All Products</button>
+      <button class="filter-btn" onclick="filterProducts(this,'bathtubs')">Bathtubs</button>
+      <button class="filter-btn" onclick="filterProducts(this,'showers')">Showers</button>
+      <button class="filter-btn" onclick="filterProducts(this,'vanities')">Vanities</button>
+      <button class="filter-btn" onclick="filterProducts(this,'spa')">Spa & Steam</button>
+      <button class="filter-btn" onclick="filterProducts(this,'smart')">Smart Tech</button>
+    </div>
+    <div class="products-grid" id="home-products"></div>
+  </section>
+
+  <!-- Brands -->
+  <section class="section brands-section">
+    <div class="section-tag reveal">Our Partners</div>
+    <h2 class="section-h reveal reveal-delay-1">48 World-Class <em>Brands</em></h2>
+    <div class="brands-grid reveal reveal-delay-2" id="brands-grid"></div>
+  </section>
+
+  <!-- Editorial Teasers -->
+  <section class="section">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0">
+      <div>
+        <div class="section-tag reveal">The Journal</div>
+        <h2 class="section-h reveal reveal-delay-1">Inspiration & <em>Expertise</em></h2>
+      </div>
+      <button class="btn-ghost reveal" style="padding:11px 24px;font-size:.7rem" onclick="navigate('editorial')">View All Articles</button>
+    </div>
+    <div class="editorial-grid" id="home-editorial"></div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials-bg">
+    <div class="section-tag reveal" style="justify-content:center;margin-bottom:4px">Affiliate Success Stories</div>
+    <h2 class="section-h reveal reveal-delay-1" style="text-align:center">What Our <em>Affiliates</em> Say</h2>
+    <div class="testi-slider reveal reveal-delay-2">
+      <div class="testi-track" id="testi-track"></div>
+    </div>
+    <div class="testi-dots" id="testi-dots"></div>
+  </section>
+
+  <!-- Affiliate Program CTA -->
+  <section class="section" style="padding-bottom:0">
+    <div class="program-grid">
+      <div class="program-left reveal">
+        <div class="section-tag" style="margin-bottom:20px">Affiliate Program</div>
+        <h2 class="section-h" style="margin-bottom:20px">Earn <em>More</em> on<br>Every Referral</h2>
+        <p style="color:var(--stone2);font-weight:200;line-height:1.75;font-size:.88rem;margin-bottom:36px;">Join 2,400+ affiliates already earning with eBathtub. Our high-ticket products mean you earn real commissions on every sale — not cents, but hundreds or thousands per referral.</p>
+        <div class="comm-showcase">
+          <div class="comm-card"><div class="comm-pct">15%</div><div class="comm-label">Max Rate</div></div>
+          <div class="comm-card"><div class="comm-pct">$4.2K</div><div class="comm-label">Avg / Month</div></div>
+          <div class="comm-card"><div class="comm-pct">90</div><div class="comm-label">Day Cookie</div></div>
+          <div class="comm-card"><div class="comm-pct">48h</div><div class="comm-label">Payout Speed</div></div>
+        </div>
+        <button class="btn-gold" onclick="navigate('affiliate')">Join the Program →</button>
+      </div>
+      <div class="program-right reveal reveal-delay-2">
+        <div class="program-steps">
+          <div class="prog-step">
+            <div class="prog-num">01</div>
+            <div><div class="prog-step-h">Apply in 60 Seconds</div><div class="prog-step-p">Fill out our quick affiliate application. Approval typically within 24 hours. No experience required — we'll train you.</div></div>
+          </div>
+          <div class="prog-step">
+            <div class="prog-num">02</div>
+            <div><div class="prog-step-h">Get Your Unique Links</div><div class="prog-step-p">Access your personal dashboard with unique tracking links for every product and category on the site.</div></div>
+          </div>
+          <div class="prog-step">
+            <div class="prog-num">03</div>
+            <div><div class="prog-step-h">Share on Social, Email & Blog</div><div class="prog-step-p">Promote through any channel. Use our AI-powered Meta automation tool to post daily without extra effort.</div></div>
+          </div>
+          <div class="prog-step">
+            <div class="prog-num">04</div>
+            <div><div class="prog-step-h">Earn High-Ticket Commissions</div><div class="prog-step-p">A $12,000 bathtub sale at 12% = $1,440 in your pocket. All commissions paid within 48 hours of confirmation.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section nl-section">
+    <div class="section-tag reveal" style="justify-content:center">Stay Informed</div>
+    <h2 class="nl-h reveal reveal-delay-1">Luxury Finds, <em>Weekly</em></h2>
+    <p class="nl-sub reveal reveal-delay-2">New products, affiliate tips, brand exclusives, and earning strategies — delivered every Tuesday to your inbox.</p>
+    <form class="nl-form reveal reveal-delay-3" onsubmit="handleNewsletter(event)">
+      <input class="nl-input" type="email" name="email" placeholder="your@email.com" required>
+      <button class="nl-submit" type="submit">Subscribe</button>
+    </form>
+    <div class="nl-note reveal">No spam. Unsubscribe anytime. 12,000+ subscribers.</div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="nav-logo" style="font-size:1.6rem">e<span style="color:var(--bone2)">Bathtub</span><sub style="font-size:.45em;color:var(--stone2);font-family:var(--font-body);letter-spacing:.15em">.com</sub></div>
+        <p class="footer-brand-desc">The world's finest bathroom products, curated for discerning homeowners and the affiliates who love to share them.</p>
+        <div class="footer-social">
+          <button class="social-btn" onclick="showToast('Instagram','Follow us @ebathtub')">📸</button>
+          <button class="social-btn" onclick="showToast('Facebook','Like our page')">📘</button>
+          <button class="social-btn" onclick="showToast('Pinterest','Pin our boards')">📌</button>
+          <button class="social-btn" onclick="showToast('YouTube','Subscribe for reviews')">▶</button>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-h">Shop</div>
+        <div class="footer-links">
+          <a class="footer-link" onclick="navigate('shop')">All Products</a>
+          <a class="footer-link" onclick="navigate('shop')">Freestanding Tubs</a>
+          <a class="footer-link" onclick="navigate('shop')">Shower Systems</a>
+          <a class="footer-link" onclick="navigate('shop')">Designer Vanities</a>
+          <a class="footer-link" onclick="navigate('shop')">Steam & Spa</a>
+          <a class="footer-link" onclick="navigate('shop')">New Arrivals</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-h">Affiliate</div>
+        <div class="footer-links">
+          <a class="footer-link" onclick="navigate('affiliate')">Join Program</a>
+          <a class="footer-link" onclick="navigate('affiliate')">Commission Rates</a>
+          <a class="footer-link" onclick="navigate('affiliate')">Dashboard</a>
+          <a class="footer-link" onclick="navigate('affiliate')">Meta Automation</a>
+          <a class="footer-link" onclick="navigate('affiliate')">Leaderboard</a>
+          <a class="footer-link" onclick="navigate('affiliate')">Resources</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-h">Company</div>
+        <div class="footer-links">
+          <a class="footer-link" onclick="navigate('about')">About Us</a>
+          <a class="footer-link" onclick="navigate('editorial')">Journal</a>
+          <a class="footer-link" onclick="navigate('contact')">Contact</a>
+          <a class="footer-link">Press</a>
+          <a class="footer-link">Careers</a>
+          <a class="footer-link">Partnerships</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 eBathtub.com · The Sanctuary Collective · All rights reserved</div>
+      <div class="footer-legal">
+        <a onclick="navigate('privacy')">Privacy Policy</a>
+        <a onclick="navigate('terms')">Terms of Service</a>
+        <a onclick="navigate('disclosure')">Affiliate Disclosure</a>
+        <a onclick="navigate('cookies')">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ SHOP PAGE ══════════════════════ -->
+<div class="page" id="page-shop">
+  <div style="padding-top:72px;">
+    <div class="section">
+      <div class="section-tag">Full Collection</div>
+      <h1 class="section-h" style="font-size:clamp(2.2rem,4vw,3.8rem)">Premium <em>Bathroom</em> Products</h1>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProducts(this,'all')">All</button>
+        <button class="filter-btn" onclick="filterProducts(this,'bathtubs')">Bathtubs</button>
+        <button class="filter-btn" onclick="filterProducts(this,'showers')">Showers</button>
+        <button class="filter-btn" onclick="filterProducts(this,'vanities')">Vanities</button>
+        <button class="filter-btn" onclick="filterProducts(this,'spa')">Spa & Steam</button>
+        <button class="filter-btn" onclick="filterProducts(this,'smart')">Smart Tech</button>
+        <button class="filter-btn" onclick="filterProducts(this,'accessories')">Accessories</button>
+      </div>
+      <div class="products-grid" id="shop-products" style="grid-template-columns:repeat(4,1fr)"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-bottom" style="padding-top:0;">
+      <div class="footer-copy">© 2026 eBathtub.com</div>
+      <div class="footer-legal"><a onclick="navigate('home')">Home</a><a onclick="navigate('contact')">Contact</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════ PRODUCT DETAIL ══════════════════ -->
+<div class="page" id="page-product">
+  <div class="product-detail">
+    <div class="pd-hero">
+      <div class="pd-vis-col" id="pd-vis-col">
+        <div class="media-frame">
+          <img id="pd-img" src="" alt="" loading="lazy" onerror="this.style.display='none'" onload="document.getElementById('pd-ph').style.display='none'">
+          <div class="media-ph" id="pd-ph">
+            <div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div>
+            <div class="media-ph-mono" id="pd-vis-mono" style="font-size:5rem"></div>
+            <div class="media-ph-label" id="pd-vis-brandlabel"></div>
+          </div>
+        </div>
+        <div class="pd-vis-thumbs" id="pd-vis-thumbs"></div>
+      </div>
+      <div class="pd-info-col">
+        <div class="pd-breadcrumb">
+          <a onclick="navigate('home')">Home</a><span>›</span>
+          <a onclick="navigate('shop')">Shop</a><span>›</span>
+          <span id="pd-breadcrumb-cat"></span>
+        </div>
+        <div class="pd-brand-tag" id="pd-brand"></div>
+        <h1 class="pd-h" id="pd-name"></h1>
+        <div class="pd-model" id="pd-model"></div>
+        <div class="pd-rating">
+          <div class="pd-stars">★★★★★</div>
+          <div class="pd-rating-txt" id="pd-rating"></div>
+        </div>
+        <div class="pd-price-block">
+          <div class="pd-price" id="pd-price"></div>
+          <div class="pd-comm-note" id="pd-comm"></div>
+        </div>
+        <p class="pd-desc" id="pd-desc"></p>
+        <div class="pd-specs" id="pd-specs"></div>
+        <div class="pd-ctas">
+          <button class="pd-btn-shop" id="pd-shop-btn" onclick="handleShopNow()">Shop Now — Earn Commission →</button>
+          <button class="pd-btn-compare" onclick="showToast('Compare','Added to comparison list.')">Add to Comparison</button>
+        </div>
+        <div class="pd-trust">
+          <div class="pd-trust-item"><span class="pd-trust-icon">✓</span> 90-day cookie tracking</div>
+          <div class="pd-trust-item"><span class="pd-trust-icon">✓</span> 48h commission payout</div>
+          <div class="pd-trust-item"><span class="pd-trust-icon">✓</span> Real-time analytics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ EDITORIAL ══════════════════════ -->
+<div class="page" id="page-editorial">
+  <div style="padding-top:72px;">
+    <div class="section">
+      <div class="section-tag">The Journal</div>
+      <h1 class="section-h" style="font-size:clamp(2.2rem,4vw,3.8rem)">Bathroom <em>Inspiration</em> & Expert Guides</h1>
+
+      <div id="studio-unlocked-banner" style="display:none;margin-top:32px;">
+        <div class="studio-lock-banner">🔓 Article Studio unlocked for this session — admin tools below</div>
+        <button class="studio-toggle" onclick="toggleStudio()">✦ Article Studio — Generate New Draft</button>
+      </div>
+
+      <div class="studio-panel" id="studio-panel">
+        <div class="studio-header">
+          <div class="studio-title">AI Article <em>Studio</em></div>
+          <div class="ai-badge" style="background:rgba(184,150,106,.1);border:1px solid rgba(184,150,106,.25);color:var(--gold);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;">✦ Powered by Claude AI</div>
+        </div>
+        <div style="font-size:.78rem;color:var(--stone2);margin-bottom:24px;line-height:1.6;max-width:560px;">Generates a draft only. Nothing appears on the public Journal until you review it and click <strong style="color:var(--gold2);font-weight:500">Publish</strong>.</div>
+
+        <div class="studio-form">
+          <div class="c-group">
+            <label class="c-label">Article Type</label>
+            <select class="c-select" id="studio-type">
+              <option value="buying-guide">Buying Guide</option>
+              <option value="affiliate-strategy">Affiliate Strategy / Income Story</option>
+              <option value="design-inspiration">Design Inspiration</option>
+              <option value="product-comparison">Product Comparison</option>
+              <option value="brand-spotlight">Brand Spotlight</option>
+              <option value="how-to">How-To / Maintenance Guide</option>
+            </select>
+          </div>
+          <div class="c-group">
+            <label class="c-label">Topic / Focus</label>
+            <select class="c-select" id="studio-topic">
+              <option value="freestanding-tubs">Freestanding Bathtubs</option>
+              <option value="soaking-tubs">Japanese Soaking Tubs</option>
+              <option value="shower-systems">Luxury Shower Systems</option>
+              <option value="smart-bathroom">Smart Bathroom Tech</option>
+              <option value="vanities">Designer Vanities</option>
+              <option value="steam-showers">Steam Showers</option>
+              <option value="spa-accessories">Spa & Wellness Accessories</option>
+            </select>
+          </div>
+          <div class="c-group">
+            <label class="c-label">Target Length</label>
+            <select class="c-select" id="studio-length">
+              <option value="short">Short (~400 words)</option>
+              <option value="medium" selected>Medium (~700 words)</option>
+              <option value="long">Long (~1100 words)</option>
+            </select>
+          </div>
+          <div class="c-group">
+            <label class="c-label">Tone</label>
+            <select class="c-select" id="studio-tone">
+              <option value="luxury">Luxury & Editorial</option>
+              <option value="friendly">Friendly & Conversational</option>
+              <option value="expert">Expert & Technical</option>
+            </select>
+          </div>
+          <div class="c-group full">
+            <label class="c-label">Specific Angle (optional)</label>
+            <input class="c-input" id="studio-angle" type="text" placeholder="e.g. focus on small bathroom layouts, or compare 3 specific brands">
+          </div>
+        </div>
+
+        <div class="studio-actions">
+          <button class="btn-studio-gen" id="studio-gen-btn" onclick="generateArticleDraft()">
+            <div class="studio-spinner"></div>
+            <span class="studio-btn-label">✦ Generate Draft</span>
+          </button>
+          <span style="font-size:.72rem;color:var(--stone);" id="studio-status"></span>
+        </div>
+
+        <div style="margin-top:36px;" id="drafts-section">
+          <div style="font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">Drafts & Published</div>
+          <div class="drafts-list" id="drafts-list"></div>
+        </div>
+      </div>
+
+      <div class="editorial-grid" id="editorial-all" style="margin-top:48px;grid-template-columns:1fr 1fr 1fr"></div>
+    </div>
+  </div>
+  <footer><div class="footer-bottom" style="padding-top:0;"><div class="footer-copy">© 2026 eBathtub.com</div><div class="footer-legal"><a onclick="navigate('home')">Home</a><a onclick="navigate('disclosure')">Affiliate Disclosure</a><a onclick="navigate('privacy')">Privacy</a><a onclick="navigate('terms')">Terms</a></div></div></footer>
+</div>
+
+<!-- ══════════════════════ ARTICLE READER ═══════════════════ -->
+<div class="page" id="page-article">
+  <div class="legal-wrap">
+    <div class="article-hero">
+      <div class="section-tag" id="article-tag">Buying Guide</div>
+      <h1 class="article-title" id="article-title">Article Title</h1>
+      <div class="article-meta-row">
+        <span id="article-date">—</span>
+        <span>·</span>
+        <span id="article-readtime">—</span>
+        <span class="article-ai-badge" id="article-ai-badge">✦ AI-Assisted Draft</span>
+      </div>
+    </div>
+    <div class="article-body-wrap">
+      <div class="article-content" id="article-content"></div>
+      <div class="legal-divider"></div>
+      <div class="legal-cross-links">
+        <a onclick="navigate('editorial')">← Back to Journal</a>
+        <a onclick="navigate('shop')">Browse Products</a>
+        <a onclick="navigate('affiliate')">Become an Affiliate</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ REVIEW MODAL ══════════════════════ -->
+<div class="review-modal-bg" id="review-modal-bg">
+  <div class="review-modal">
+    <button class="review-modal-close" onclick="closeReviewModal()">✕</button>
+    <div class="review-ai-tag">✦ AI Draft — Review Before Publishing</div>
+    <h2 class="review-title" id="review-title">—</h2>
+    <div class="review-content" id="review-content">—</div>
+    <div class="review-modal-actions">
+      <button class="draft-btn draft-btn-publish" style="padding:12px 24px;" onclick="publishDraftFromModal()">✓ Publish to Journal</button>
+      <button class="draft-btn draft-btn-review" style="padding:12px 24px;" onclick="closeReviewModal()">Keep as Draft</button>
+      <button class="draft-btn draft-btn-delete" style="padding:12px 24px;" onclick="deleteDraftFromModal()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ STUDIO ACCESS GATE ═══════════════
+     Client-side deterrent only. Requires the page URL to include
+     ?studio=SECRET_KEY (see STUDIO_SECRET_KEY in <script> below)
+     AND the correct password before the Studio panel is revealed.
+     This is NOT real server-side authentication — anyone who reads
+     the page source can find both values. It only stops casual
+     visitors and search engines from finding/using the tool. -->
+<div class="studio-gate-bg" id="studio-gate-bg">
+  <div class="studio-gate-box">
+    <div class="studio-gate-icon">🔒</div>
+    <div class="studio-gate-h">Admin Access</div>
+    <div class="studio-gate-p">This area is for site administrators only. Enter the password to unlock the Article Studio for this session.</div>
+    <input type="password" class="studio-gate-input" id="studio-gate-password" placeholder="Password" onkeydown="if(event.key==='Enter')attemptStudioUnlock()">
+    <div class="studio-gate-error" id="studio-gate-error"></div>
+    <button class="studio-gate-submit" onclick="attemptStudioUnlock()">Unlock Studio</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ BRANDS PAGE ════════════════════ -->
+<div class="page" id="page-brands">
+  <div style="padding-top:72px;">
+    <div class="section">
+      <div class="section-tag">Our Partners</div>
+      <h1 class="section-h" style="font-size:clamp(2.2rem,4vw,3.8rem)">48 World-Class <em>Brands</em></h1>
+      <p style="color:var(--stone2);font-weight:200;max-width:540px;line-height:1.75;margin-top:16px;margin-bottom:56px;">We partner exclusively with brands that meet our exacting standards for quality, craftsmanship, and customer experience.</p>
+      <div class="brands-grid" style="grid-template-columns:repeat(6,1fr)" id="brands-page-grid"></div>
+    </div>
+  </div>
+  <footer><div class="footer-bottom" style="padding-top:0;"><div class="footer-copy">© 2026 eBathtub.com</div><div class="footer-legal"><a onclick="navigate('home')">Home</a><a onclick="navigate('disclosure')">Affiliate Disclosure</a><a onclick="navigate('privacy')">Privacy</a></div></div></footer>
+</div>
+
+<!-- ══════════════════════ AFFILIATE PAGE ══════════════════ -->
+<div class="page" id="page-affiliate">
+  <div style="padding-top:72px;">
+    <!-- Affiliate Hero -->
+    <div style="min-height:55vh;display:flex;align-items:flex-end;padding:100px 60px 70px;background:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(184,150,106,.07), transparent 70%), var(--ink2);border-bottom:1px solid rgba(184,150,106,.1);position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-50px;right:60px;font-size:20rem;opacity:.04;line-height:1">💰</div>
+      <div style="max-width:640px;position:relative;z-index:2;">
+        <div class="section-tag" style="margin-bottom:20px">Affiliate Program</div>
+        <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,5vw,5rem);font-weight:400;line-height:1.05;margin-bottom:24px;">Turn <em style="font-style:italic;color:var(--gold2)">Taste</em> Into <em style="font-style:italic;color:var(--gold2)">Income</em></h1>
+        <p style="font-size:1rem;color:var(--stone2);font-weight:200;line-height:1.8;max-width:480px;margin-bottom:44px;">Earn industry-leading commissions sharing products you already love. Our high-ticket catalog means a single sale can earn you hundreds — even thousands of dollars.</p>
+        <div style="display:flex;gap:14px;">
+          <button class="btn-gold" onclick="showToast('Application','Redirecting to affiliate signup...')">Apply Now — It\'s Free</button>
+          <button class="btn-ghost" onclick="showToast('Login','Redirecting to affiliate login...')">Affiliate Login</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Commission Tiers -->
+    <div class="section">
+      <div class="section-tag reveal">Commission Structure</div>
+      <h2 class="section-h reveal reveal-delay-1">The More You Earn,<br><em>The More You Earn</em></h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:48px;">
+        <div style="background:var(--ink2);padding:44px 36px;border:1px solid rgba(184,150,106,.1);text-align:center;transition:border-color .3s;cursor:none;" class="reveal" onmouseover="this.style.borderColor='rgba(184,150,106,.3)'" onmouseout="this.style.borderColor='rgba(184,150,106,.1)'">
+          <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-bottom:16px;">Starter</div>
+          <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:400;color:var(--gold2);line-height:1;margin-bottom:8px;">8%</div>
+          <div style="font-size:.75rem;color:var(--stone2);margin-bottom:24px;">$0 – $5,000/mo sales</div>
+          <div style="font-size:.8rem;color:var(--bone2);line-height:1.8;font-weight:200;">Access to full catalog<br>Basic analytics dashboard<br>90-day cookie window</div>
+        </div>
+        <div style="background:var(--gold);padding:44px 36px;text-align:center;position:relative;overflow:hidden;" class="reveal reveal-delay-1">
+          <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:var(--ink);color:var(--gold);padding:4px 14px;">Most Popular</div>
+          <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(15,13,11,.6);margin-bottom:16px;margin-top:18px;">Pro</div>
+          <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:400;color:var(--ink);line-height:1;margin-bottom:8px;">12%</div>
+          <div style="font-size:.75rem;color:rgba(15,13,11,.6);margin-bottom:24px;">$5K – $25K/mo sales</div>
+          <div style="font-size:.8rem;color:var(--ink);line-height:1.8;">Priority product access<br>Advanced analytics + AI tools<br>Dedicated affiliate manager</div>
+        </div>
+        <div style="background:var(--ink2);padding:44px 36px;border:1px solid rgba(184,150,106,.1);text-align:center;transition:border-color .3s;cursor:none;" class="reveal reveal-delay-2" onmouseover="this.style.borderColor='rgba(184,150,106,.3)'" onmouseout="this.style.borderColor='rgba(184,150,106,.1)'">
+          <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-bottom:16px;">Elite</div>
+          <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:400;color:var(--gold2);line-height:1;margin-bottom:8px;">15%</div>
+          <div style="font-size:.75rem;color:var(--stone2);margin-bottom:24px;">$25,000+/mo sales</div>
+          <div style="font-size:.8rem;color:var(--bone2);line-height:1.8;font-weight:200;">Exclusive early access<br>Custom landing pages<br>White-glove support + bonuses</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Application Form -->
+    <div class="section" style="background:var(--ink2);border-top:1px solid rgba(184,150,106,.08);border-bottom:1px solid rgba(184,150,106,.08);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+        <div>
+          <div class="section-tag reveal">Apply Today</div>
+          <h2 class="section-h reveal reveal-delay-1" style="margin-bottom:20px">Start Earning <em>Now</em></h2>
+          <p class="reveal reveal-delay-2" style="color:var(--stone2);font-weight:200;line-height:1.75;font-size:.88rem;margin-bottom:36px;">Approval within 24 hours. No fees, no minimums. You keep 100% of your earned commissions.</p>
+          <div style="display:flex;flex-direction:column;gap:16px;" class="reveal reveal-delay-3">
+            <div style="display:flex;align-items:center;gap:12px;font-size:.85rem;color:var(--bone2);font-weight:200;"><span style="color:var(--gold)">✓</span> No website required — social media works</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:.85rem;color:var(--bone2);font-weight:200;"><span style="color:var(--gold)">✓</span> Free AI-powered Meta posting tool included</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:.85rem;color:var(--bone2);font-weight:200;"><span style="color:var(--gold)">✓</span> Real-time commission tracking dashboard</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:.85rem;color:var(--bone2);font-weight:200;"><span style="color:var(--gold)">✓</span> Payouts via PayPal, bank transfer, or crypto</div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <form class="c-form" onsubmit="handleAffiliateApply(event)">
+            <div class="c-row">
+              <div class="c-group"><label class="c-label">First Name</label><input class="c-input" type="text" name="first_name" placeholder="Darwin" required></div>
+              <div class="c-group"><label class="c-label">Last Name</label><input class="c-input" type="text" name="last_name" placeholder="Smith" required></div>
+            </div>
+            <div class="c-group"><label class="c-label">Email Address</label><input class="c-input" type="email" name="email" placeholder="you@example.com" required></div>
+            <div class="c-group"><label class="c-label">Website / Social Media URL</label><input class="c-input" type="url" name="website" placeholder="https://"></div>
+            <div class="c-group">
+              <label class="c-label">Primary Promotion Channel</label>
+              <select class="c-select" name="promotion_channel">
+                <option>Instagram</option>
+                <option>Facebook</option>
+                <option>Blog / Website</option>
+                <option>YouTube</option>
+                <option>TikTok</option>
+                <option>Email Newsletter</option>
+                <option>Pinterest</option>
+              </select>
+            </div>
+            <div class="c-group"><label class="c-label">Monthly Audience Size</label>
+              <select class="c-select" name="audience_size">
+                <option>Under 1,000</option>
+                <option>1,000 – 10,000</option>
+                <option>10,000 – 50,000</option>
+                <option>50,000 – 250,000</option>
+                <option>250,000+</option>
+              </select>
+            </div>
+            <button class="c-submit" type="submit">Submit Application →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-bottom" style="padding-top:24px;border-top:1px solid rgba(184,150,106,.08);margin-top:0;"><div class="footer-copy">© 2026 eBathtub.com · <a onclick="navigate('disclosure')" style="cursor:none;color:var(--stone);border-bottom:1px solid rgba(184,150,106,.2)">Affiliate Disclosure</a>: We earn commissions on qualifying purchases.</div><div class="footer-legal"><a onclick="navigate('privacy')">Privacy</a><a onclick="navigate('terms')">Terms</a></div></div></footer>
+</div>
+
+<!-- ══════════════════════ ABOUT PAGE ══════════════════════ -->
+<div class="page" id="page-about">
+  <div style="padding-top:72px;">
+    <div class="about-hero">
+      <div class="about-hero-grid">
+        <div>
+          <div class="section-tag" style="margin-bottom:20px">Our Story</div>
+          <h1 class="about-h">Redefining <em>The Luxury</em> Bathroom Experience</h1>
+        </div>
+        <div>
+          <p class="about-lead">We believe the bathroom is the most intimate room in a home. eBathtub was founded to connect discerning homeowners with the world's finest products — and to build a community of passionate affiliates who share our obsession with design and quality.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="about-values">
+        <div class="value-card reveal">
+          <div class="value-icon">🎯</div>
+          <div class="value-h">Obsessive Curation</div>
+          <p class="value-p">Every product on eBathtub passes through a rigorous vetting process. We evaluate quality, brand reputation, customer support, and commission fairness before listing anything.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-icon">🤝</div>
+          <div class="value-h">Affiliate First</div>
+          <p class="value-p">We built this platform with affiliates at the center. Our tools, commission rates, and support structure are designed to maximize your earning potential, not ours.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-icon">✨</div>
+          <div class="value-h">Luxury Without Pretense</div>
+          <p class="value-p">High-ticket doesn't mean inaccessible. We make premium bathroom products approachable, understandable, and easy to recommend — even if you're not an interior designer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-mission">
+      <div class="mission-left">
+        <h2 class="mission-h">Our Mission</h2>
+        <p class="mission-p">To become the world's most trusted destination for premium bathroom products — and to create a generation of financially empowered affiliates who share beautiful spaces with the world.</p>
+      </div>
+      <div class="mission-right">
+        <div class="mission-stats">
+          <div><div class="ms-num">340+</div><div class="ms-label">Products Listed</div></div>
+          <div><div class="ms-num">48</div><div class="ms-label">Brand Partners</div></div>
+          <div><div class="ms-num">2,400</div><div class="ms-label">Active Affiliates</div></div>
+          <div><div class="ms-num">$2.1M</div><div class="ms-label">Commissions Paid</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-bottom" style="padding:24px 60px;border-top:1px solid rgba(184,150,106,.08);"><div class="footer-copy">© 2026 eBathtub.com · The Sanctuary Collective</div><div class="footer-legal"><a onclick="navigate('home')">Home</a><a onclick="navigate('disclosure')">Affiliate Disclosure</a><a onclick="navigate('privacy')">Privacy</a><a onclick="navigate('terms')">Terms</a><a onclick="navigate('contact')">Contact</a></div></div></footer>
+</div>
+
+<!-- ══════════════════════ CONTACT PAGE ════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="section-tag" style="margin-bottom:20px">Get in Touch</div>
+      <h1 class="contact-h">Let's <em>Talk</em><br>Luxury</h1>
+      <p class="contact-sub">Whether you're a brand looking to partner, an affiliate with questions, or a homeowner seeking recommendations — we'd love to hear from you.</p>
+      <div class="contact-info-items">
+        <div class="ci-item">
+          <div class="ci-icon">📧</div>
+          <div><div class="ci-label">Email</div><div class="ci-val">hello@ebathtub.com</div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">💼</div>
+          <div><div class="ci-label">Affiliate Support</div><div class="ci-val">affiliates@ebathtub.com</div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">🤝</div>
+          <div><div class="ci-label">Brand Partnerships</div><div class="ci-val">brands@ebathtub.com</div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">⏱</div>
+          <div><div class="ci-label">Response Time</div><div class="ci-val">Within 24 hours, Mon–Fri</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <h2 style="font-family:var(--font-display);font-size:1.5rem;font-weight:400;margin-bottom:28px;color:var(--bone2)">Send a <em style="font-style:italic;color:var(--gold2)">Message</em></h2>
+      <form class="c-form" onsubmit="handleContact(event)">
+        <div class="c-row">
+          <div class="c-group"><label class="c-label">First Name</label><input class="c-input" type="text" name="first_name" placeholder="Darwin" required></div>
+          <div class="c-group"><label class="c-label">Last Name</label><input class="c-input" type="text" name="last_name" placeholder="Smith" required></div>
+        </div>
+        <div class="c-group"><label class="c-label">Email</label><input class="c-input" type="email" name="email" placeholder="you@example.com" required></div>
+        <div class="c-group">
+          <label class="c-label">Subject</label>
+          <select class="c-select" name="subject">
+            <option>Affiliate Program Inquiry</option>
+            <option>Brand Partnership</option>
+            <option>Product Recommendation</option>
+            <option>Technical Support</option>
+            <option>Press & Media</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="c-group"><label class="c-label">Message</label><textarea class="c-textarea" name="message" placeholder="Tell us how we can help..." required></textarea></div>
+        <button class="c-submit" type="submit">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ AFFILIATE DISCLOSURE ═════════════ -->
+<div class="page" id="page-disclosure">
+  <div class="legal-wrap">
+    <div class="legal-hero">
+      <div class="section-tag">Required Disclosure</div>
+      <h1 class="section-h" style="font-size:clamp(2rem,3.5vw,3rem)">Affiliate <em>Disclosure</em></h1>
+      <div class="legal-updated">Last updated: June 23, 2026</div>
+    </div>
+    <div class="legal-body">
+      <div class="legal-callout">
+        <p>In short: eBathtub.com earns commissions when you click certain links and make a purchase. This never costs you anything extra, and it's how we keep this site free and ad-light.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>FTC Compliance Notice</h2>
+        <p>In accordance with the Federal Trade Commission's 16 CFR Part 255 ("Guides Concerning the Use of Endorsements and Testimonials in Advertising"), eBathtub.com (operated by <span class="legal-placeholder">ADM Holdings LLC (placeholder — confirm real entity name)</span>) discloses that this website participates in affiliate marketing programs.</p>
+        <p>This means that when you click on certain product links, brand links, or "Shop Now" buttons on this site and subsequently make a purchase, we may receive a commission from the retailer or brand at no additional cost to you. The price you pay is the same whether or not you use our link.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Which Programs We Participate In</h2>
+        <p>eBathtub.com may participate in, but is not limited to, the following types of affiliate and partner programs:</p>
+        <ul>
+          <li>Amazon Associates Program</li>
+          <li>ShareASale, CJ Affiliate, Impact, Rakuten Advertising, and Awin affiliate networks</li>
+          <li>Direct brand affiliate or referral partnerships with bathroom, fixture, and home improvement manufacturers and retailers</li>
+        </ul>
+        <p>As an Amazon Associate (where applicable), we earn from qualifying purchases.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Editorial Independence</h2>
+        <p>Our product selections, category rankings, and editorial content are based on our own research, brand vetting criteria, and product quality standards. Commission availability or rate does not solely determine which products we feature, though we are transparent that high-ticket commission products are a core part of our business model.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Our Own Affiliate Program</h2>
+        <p>Separately, eBathtub.com operates its own affiliate program allowing third parties to earn commissions by referring visitors to our site. Affiliates promoting eBathtub.com are independently required to disclose their own affiliate relationship with us in accordance with FTC guidelines.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Questions</h2>
+        <p>If you have questions about this disclosure or our affiliate relationships, contact us at <span class="legal-placeholder">privacy@ebathtub.com</span>.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+      <div class="legal-cross-links">
+        <a onclick="navigate('privacy')">Privacy Policy</a>
+        <a onclick="navigate('terms')">Terms of Service</a>
+        <a onclick="navigate('cookies')">Cookie Policy</a>
+        <a onclick="navigate('contact')">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ PRIVACY POLICY ═══════════════════ -->
+<div class="page" id="page-privacy">
+  <div class="legal-wrap">
+    <div class="legal-hero">
+      <div class="section-tag">Your Data, Explained</div>
+      <h1 class="section-h" style="font-size:clamp(2rem,3.5vw,3rem)">Privacy <em>Policy</em></h1>
+      <div class="legal-updated">Last updated: June 23, 2026 · Operated by <span class="legal-placeholder">ADM Holdings LLC (placeholder — confirm real entity name)</span></div>
+    </div>
+    <div class="legal-body">
+      <div class="legal-toc">
+        <div class="legal-toc-h">On This Page</div>
+        <a href="#pp-collect">Information We Collect</a>
+        <a href="#pp-use">How We Use Your Information</a>
+        <a href="#pp-share">How We Share Information</a>
+        <a href="#pp-cookies">Cookies & Tracking</a>
+        <a href="#pp-affiliate">Affiliate Link Tracking</a>
+        <a href="#pp-rights">Your Privacy Rights</a>
+        <a href="#pp-security">Data Security</a>
+        <a href="#pp-children">Children's Privacy</a>
+        <a href="#pp-changes">Changes to This Policy</a>
+        <a href="#pp-contact">Contact Us</a>
+      </div>
+
+      <div class="legal-section">
+        <p>eBathtub.com ("we," "us," "our," operated by <span class="legal-placeholder">ADM Holdings LLC (placeholder — confirm real entity name)</span>) respects your privacy. This Privacy Policy explains what information we collect, how we use it, and the choices you have. By using this site, you agree to the practices described below.</p>
+      </div>
+
+      <div class="legal-section" id="pp-collect">
+        <h2>1. Information We Collect</h2>
+        <h3>Information You Provide Directly</h3>
+        <ul>
+          <li>Contact form submissions (name, email, message)</li>
+          <li>Newsletter sign-up (email address)</li>
+          <li>Affiliate program applications (name, email, website/social URL, audience size, promotion channel)</li>
+        </ul>
+        <h3>Information Collected Automatically</h3>
+        <ul>
+          <li>IP address, browser type, device type, and operating system</li>
+          <li>Pages visited, time on site, referring URLs, and click activity</li>
+          <li>Affiliate link clicks and associated tracking cookies (see Section 4)</li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="pp-use">
+        <h2>2. How We Use Your Information</h2>
+        <ul>
+          <li>To respond to inquiries submitted through our contact form</li>
+          <li>To send newsletter content to subscribers who opt in</li>
+          <li>To evaluate and process affiliate program applications</li>
+          <li>To attribute affiliate sales and calculate commissions owed to our affiliates</li>
+          <li>To improve site performance, content, and product recommendations</li>
+          <li>To detect and prevent fraud, spam, or abuse of our forms and affiliate program</li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="pp-share">
+        <h2>3. How We Share Information</h2>
+        <p>We do not sell your personal information. We may share information with:</p>
+        <ul>
+          <li><strong style="color:var(--bone2);font-weight:400">Service providers</strong> — such as Formspree (form processing) and our hosting provider — who process data on our behalf under their own privacy and security obligations</li>
+          <li><strong style="color:var(--bone2);font-weight:400">Affiliate networks and brand partners</strong> — to the extent necessary to track referred purchases and attribute commissions</li>
+          <li><strong style="color:var(--bone2);font-weight:400">Legal authorities</strong> — if required by law, subpoena, or to protect our legal rights</li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="pp-cookies">
+        <h2>4. Cookies & Tracking Technologies</h2>
+        <p>We use cookies and similar technologies for site functionality, analytics, and affiliate tracking. See our <a onclick="navigate('cookies')" style="color:var(--gold2);cursor:none;border-bottom:1px solid rgba(184,150,106,.3)">Cookie Policy</a> for full details on the types of cookies we use and how to manage your preferences.</p>
+      </div>
+
+      <div class="legal-section" id="pp-affiliate">
+        <h2>5. Affiliate Link Tracking</h2>
+        <p>When you click an affiliate link on eBathtub.com, a tracking cookie (typically lasting up to 90 days, depending on the network) is placed in your browser. This cookie allows the retailer or affiliate network to credit eBathtub.com — or, where applicable, one of our affiliates — if you complete a purchase. We do not have access to your payment information through this process; that is handled entirely by the retailer.</p>
+      </div>
+
+      <div class="legal-section" id="pp-rights">
+        <h2>6. Your Privacy Rights</h2>
+        <p>Depending on your location, you may have rights under laws such as the California Consumer Privacy Act (CCPA) or the EU General Data Protection Regulation (GDPR), including the right to:</p>
+        <ul>
+          <li>Request access to the personal information we hold about you</li>
+          <li>Request correction or deletion of your personal information</li>
+          <li>Opt out of marketing communications at any time (e.g., unsubscribe link in our newsletter)</li>
+          <li>Object to or restrict certain processing of your data</li>
+        </ul>
+        <p>To exercise these rights, contact us at <span class="legal-placeholder">privacy@ebathtub.com</span>.</p>
+      </div>
+
+      <div class="legal-section" id="pp-security">
+        <h2>7. Data Security</h2>
+        <p>We use reasonable technical and organizational measures to protect your information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+      </div>
+
+      <div class="legal-section" id="pp-children">
+        <h2>8. Children's Privacy</h2>
+        <p>This site is not directed at children under 13 (or 16, where applicable under local law), and we do not knowingly collect personal information from children. If we learn we have collected such information, we will delete it promptly.</p>
+      </div>
+
+      <div class="legal-section" id="pp-changes">
+        <h2>9. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+      </div>
+
+      <div class="legal-section" id="pp-contact">
+        <h2>10. Contact Us</h2>
+        <p>Questions about this Privacy Policy can be directed to <span class="legal-placeholder">privacy@ebathtub.com</span>.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+      <div class="legal-cross-links">
+        <a onclick="navigate('disclosure')">Affiliate Disclosure</a>
+        <a onclick="navigate('terms')">Terms of Service</a>
+        <a onclick="navigate('cookies')">Cookie Policy</a>
+        <a onclick="navigate('contact')">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ TERMS OF SERVICE ═════════════════ -->
+<div class="page" id="page-terms">
+  <div class="legal-wrap">
+    <div class="legal-hero">
+      <div class="section-tag">The Fine Print</div>
+      <h1 class="section-h" style="font-size:clamp(2rem,3.5vw,3rem)">Terms of <em>Service</em></h1>
+      <div class="legal-updated">Last updated: June 23, 2026 · Operated by <span class="legal-placeholder">ADM Holdings LLC (placeholder — confirm real entity name)</span></div>
+    </div>
+    <div class="legal-body">
+      <div class="legal-toc">
+        <div class="legal-toc-h">On This Page</div>
+        <a href="#ts-acceptance">Acceptance of Terms</a>
+        <a href="#ts-site">Use of the Site</a>
+        <a href="#ts-affiliate-links">Third-Party & Affiliate Links</a>
+        <a href="#ts-program">Affiliate Program Terms</a>
+        <a href="#ts-ip">Intellectual Property</a>
+        <a href="#ts-disclaimer">Disclaimers & Limitation of Liability</a>
+        <a href="#ts-indemnity">Indemnification</a>
+        <a href="#ts-law">Governing Law</a>
+        <a href="#ts-changes">Changes to These Terms</a>
+        <a href="#ts-contact">Contact</a>
+      </div>
+
+      <div class="legal-section" id="ts-acceptance">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using eBathtub.com (the "Site"), operated by <span class="legal-placeholder">ADM Holdings LLC (placeholder — confirm real entity name)</span> ("eBathtub," "we," "us"), you agree to be bound by these Terms of Service. If you do not agree, please discontinue use of the Site.</p>
+      </div>
+
+      <div class="legal-section" id="ts-site">
+        <h2>2. Use of the Site</h2>
+        <p>The Site provides curated information about bathroom and bathware products for informational and shopping-referral purposes. You agree to use the Site only for lawful purposes and agree not to:</p>
+        <ul>
+          <li>Scrape, copy, or republish substantial portions of our content without permission</li>
+          <li>Attempt to interfere with the Site's normal operation or security</li>
+          <li>Submit false, fraudulent, or misleading information through our forms or affiliate application</li>
+          <li>Use automated systems (bots) to generate affiliate link clicks or form submissions</li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="ts-affiliate-links">
+        <h2>3. Third-Party & Affiliate Links</h2>
+        <p>The Site contains links to third-party retailers, brands, and affiliate networks. We do not control and are not responsible for the content, pricing, accuracy, product availability, or business practices of any third-party site. Your purchase from a linked retailer is a transaction solely between you and that retailer, governed by their own terms and policies. See our <a onclick="navigate('disclosure')" style="color:var(--gold2);cursor:none;border-bottom:1px solid rgba(184,150,106,.3)">Affiliate Disclosure</a> for more detail on how affiliate links work on this Site.</p>
+      </div>
+
+      <div class="legal-section" id="ts-program">
+        <h2>4. Affiliate Program Terms</h2>
+        <p>If you apply to and are approved for the eBathtub affiliate program, the following additional terms apply:</p>
+        <ul>
+          <li>Commission rates and tiers (currently advertised at 8%–15%) are subject to change with reasonable notice and apply only to qualifying, completed, non-refunded sales</li>
+          <li>We reserve the right to approve, reject, suspend, or terminate any affiliate account at our discretion, including for fraudulent activity, spam, or violation of these Terms</li>
+          <li>Affiliates may not bid on eBathtub or related brand trademark terms in paid search advertising without prior written permission</li>
+          <li>Affiliates are independently responsible for their own FTC disclosure obligations when promoting eBathtub.com links</li>
+          <li>Commission payout schedules and minimum thresholds are described in your affiliate dashboard and may be updated from time to time</li>
+        </ul>
+      </div>
+
+      <div class="legal-section" id="ts-ip">
+        <h2>5. Intellectual Property</h2>
+        <p>All original content on this Site — including text, design, graphics, and the eBathtub name and branding — is the property of <span class="legal-placeholder">ADM Holdings LLC (placeholder — confirm real entity name)</span> unless otherwise credited. Product names, brand names, and trademarks referenced on this Site belong to their respective owners and are used for identification and informational purposes only.</p>
+      </div>
+
+      <div class="legal-section" id="ts-disclaimer">
+        <h2>6. Disclaimers & Limitation of Liability</h2>
+        <p>The Site and its content are provided "as is" without warranties of any kind, express or implied. We do not guarantee the accuracy, completeness, or timeliness of product information, pricing, or specifications, which are subject to change by the manufacturer or retailer at any time.</p>
+        <p>To the fullest extent permitted by law, <span class="legal-placeholder">ADM Holdings LLC (placeholder — confirm real entity name)</span> shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Site or any third-party site linked from it.</p>
+      </div>
+
+      <div class="legal-section" id="ts-indemnity">
+        <h2>7. Indemnification</h2>
+        <p>You agree to indemnify and hold harmless eBathtub.com and its operators from any claims, damages, or expenses arising from your violation of these Terms or misuse of the Site.</p>
+      </div>
+
+      <div class="legal-section" id="ts-law">
+        <h2>8. Governing Law</h2>
+        <p>These Terms are governed by the laws of <span class="legal-placeholder">Delaware (placeholder — confirm real governing jurisdiction)</span>, without regard to conflict-of-law principles.</p>
+      </div>
+
+      <div class="legal-section" id="ts-changes">
+        <h2>9. Changes to These Terms</h2>
+        <p>We may revise these Terms at any time. Continued use of the Site after changes are posted constitutes acceptance of the revised Terms.</p>
+      </div>
+
+      <div class="legal-section" id="ts-contact">
+        <h2>10. Contact</h2>
+        <p>Questions about these Terms can be directed to <span class="legal-placeholder">privacy@ebathtub.com</span>.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+      <div class="legal-cross-links">
+        <a onclick="navigate('disclosure')">Affiliate Disclosure</a>
+        <a onclick="navigate('privacy')">Privacy Policy</a>
+        <a onclick="navigate('cookies')">Cookie Policy</a>
+        <a onclick="navigate('contact')">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ COOKIE POLICY ═════════════════════ -->
+<div class="page" id="page-cookies">
+  <div class="legal-wrap">
+    <div class="legal-hero">
+      <div class="section-tag">How We Use Cookies</div>
+      <h1 class="section-h" style="font-size:clamp(2rem,3.5vw,3rem)">Cookie <em>Policy</em></h1>
+      <div class="legal-updated">Last updated: June 23, 2026</div>
+    </div>
+    <div class="legal-body">
+      <div class="legal-section">
+        <p>This Cookie Policy explains how eBathtub.com uses cookies and similar tracking technologies when you visit our Site, and how you can control them.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>1. What Are Cookies?</h2>
+        <p>Cookies are small text files placed on your device when you visit a website. They help the site function, remember preferences, and — in the case of affiliate marketing — track which referral led to a purchase so commissions can be properly attributed.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>2. Types of Cookies We Use</h2>
+        <h3>Essential Cookies</h3>
+        <p>Required for core site functionality, such as remembering your filter selections while browsing the shop page. The Site cannot function properly without these.</p>
+        <h3>Affiliate Tracking Cookies</h3>
+        <p>Set when you click a "Shop Now" or affiliate link. These cookies (typically lasting up to 90 days) allow the relevant retailer or affiliate network to attribute a resulting purchase back to eBathtub.com or one of our affiliates.</p>
+        <h3>Analytics Cookies</h3>
+        <p>Help us understand how visitors use the Site — which pages are popular, how long visitors stay, and where they came from — so we can improve content and product selection.</p>
+        <h3>Preference Cookies</h3>
+        <p>Remember choices you've made, such as wishlist items, so you don't have to re-select them on every visit.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>3. Third-Party Cookies</h2>
+        <p>Some cookies are placed by third parties we work with, including affiliate networks (e.g., Amazon Associates, ShareASale, CJ Affiliate), our form processor (Formspree), and any analytics tools we use. These third parties have their own privacy and cookie policies governing their use of this data.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>4. Managing Your Cookie Preferences</h2>
+        <p>Most browsers let you control cookies through their settings, including blocking or deleting them. Note that disabling essential cookies may affect Site functionality, and disabling affiliate tracking cookies means a retailer may not be able to attribute your purchase to eBathtub.com.</p>
+        <ul>
+          <li>Chrome: Settings → Privacy and Security → Cookies</li>
+          <li>Safari: Preferences → Privacy</li>
+          <li>Firefox: Settings → Privacy & Security</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h2>5. Changes to This Policy</h2>
+        <p>We may update this Cookie Policy periodically. Check back for the latest version, indicated by the "Last updated" date above.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>6. Contact</h2>
+        <p>Questions about our use of cookies can be directed to <span class="legal-placeholder">privacy@ebathtub.com</span>.</p>
+      </div>
+
+      <div class="legal-divider"></div>
+      <div class="legal-cross-links">
+        <a onclick="navigate('disclosure')">Affiliate Disclosure</a>
+        <a onclick="navigate('privacy')">Privacy Policy</a>
+        <a onclick="navigate('terms')">Terms of Service</a>
+        <a onclick="navigate('contact')">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+//  DATA
+// ════════════════════════════════════════
+const PRODUCTS = [
+  {id:'p1',link:'PASTE_AFFILIATE_LINK_HERE',amazonAsin:'B0764P3DXX',cat:'bathtubs',img:'',monogram:'K',emoji:'🛁',brand:'Kohler',name:'Underscore 72" Freestanding',model:'K-6367-0',price:'$4,299',raw:4299,comm:'12% commission · ~$516 per sale',commPct:'12%',rating:'4.9 (312 reviews)',desc:'The Underscore freestanding bath brings a refined aesthetic to any master bath. Its sloped backrest provides exceptional comfort while the clean-lined silhouette complements both traditional and contemporary bathrooms.',specs:[['Material','Premium enameled cast iron'],['Dimensions','72" x 36" x 20"'],['Faucet Holes','Deck-mounted, rim-mount'],['Weight','292 lbs'],['Finish','White / Biscuit / Almond'],['Warranty','Lifetime limited']],badge:'Best Seller',bg:'linear-gradient(135deg,#1A1410,#0E0C08)'},
+  {id:'p2',link:'PASTE_AFFILIATE_LINK_HERE',cat:'bathtubs',img:'',monogram:'BU',emoji:'🛀',brand:'Bain Ultra',name:'Amma Thermomasseur Bath',model:'AMMA-6036',price:'$7,800',raw:7800,comm:'10% commission · ~$780 per sale',commPct:'10%',rating:'4.8 (187 reviews)',desc:'The Amma Thermomasseur combines chromotherapy, thermotherapy, and hydrotherapy in one extraordinary bath. BAIN ULTRA\'s exclusive technology maintains water temperature for up to 45 minutes of pure relaxation.',specs:[['Material','CRISTALITE® acrylic'],['Dimensions','60" x 36" x 23"'],['Jets','34 adjustable hydro jets'],['Features','Chromotherapy, thermotherapy'],['Power','120V / 15 amp'],['Warranty','10-year limited']],badge:'Editor\'s Pick',bg:'linear-gradient(135deg,#101820,#080E14)'},
+  {id:'p3',link:'PASTE_AFFILIATE_LINK_HERE',cat:'bathtubs',img:'',monogram:'V+A',emoji:'✨',brand:'Victoria + Albert',name:'Ios Freestanding Bath',model:'IOS-N-SW-OF',price:'$12,500',raw:12500,comm:'8% commission · ~$1,000 per sale',commPct:'8%',rating:'5.0 (94 reviews)',desc:'Hand-crafted in England from QUARRYCAST® — a unique blend of volcanic limestone and high-performance resin — the Ios bath is both a functional masterpiece and a sculptural art form.',specs:[['Material','QUARRYCAST® volcanic limestone'],['Dimensions','67" x 31" x 22"'],['Weight','132 lbs'],['Origin','Hand-crafted in England'],['Finish','Over 190 color options'],['Warranty','25-year structural']],badge:'Luxury',bg:'linear-gradient(135deg,#1C1814,#100E0A)'},
+  {id:'p4',link:'PASTE_AFFILIATE_LINK_HERE',amazonAsin:'B07ZTL58VB'/* closest real match: GROHE Rainshower SmartActive 310 w/ thermostat, ref 26647000 \u2014 not identical to the fictional GRH-26250 model above */,cat:'showers',img:'',monogram:'G',emoji:'🚿',brand:'Grohe',name:'Rainshower System 360° Pro',model:'GRH-26250',price:'$3,200',raw:3200,comm:'14% commission · ~$448 per sale',commPct:'14%',rating:'4.7 (428 reviews)',desc:'The Grohe Rainshower 360° Pro delivers an immersive rainfall experience with a 14-inch overhead shower head, integrated thermostat control, and four adjustable side jets for a full-body spa experience.',specs:[['Head Diameter','14" (360mm)'],['Flow Rate','2.5 GPM'],['Spray Modes','RainShower, HandShower, Massage'],['Finish','StarLight Chrome / Brushed Nickel'],['Thermostat','Grohtherm 3000 included'],['Warranty','Lifetime on finish & function']],badge:'Top Commission',bg:'linear-gradient(135deg,#101818,#080E0E)'},
+  {id:'p5',link:'PASTE_AFFILIATE_LINK_HERE',cat:'vanities',img:'',monogram:'D',emoji:'🪞',brand:'Duravit',name:'Starck 3 Vanity Suite',model:'ST3-1600',price:'$9,600',raw:9600,comm:'11% commission · ~$1,056 per sale',commPct:'11%',rating:'4.8 (156 reviews)',desc:'Philippe Starck\'s vision of the perfect vanity: drawer-fronts that are pure planes of matt lacquer, seamless integrated sink, and soft-close hardware throughout. Available in 12 Matt Lacquer finishes.',specs:[['Width','63" (1600mm)'],['Depth','19" (480mm)'],['Height','33" (850mm)'],['Finish','12 Matt Lacquer options'],['Sink','Integrated Vero basin'],['Designer','Philippe Starck']],badge:'Designer',bg:'linear-gradient(135deg,#181418,#100C10)'},
+  {id:'p6',link:'PASTE_AFFILIATE_LINK_HERE',cat:'spa',img:'',monogram:'MTI',emoji:'🌿',brand:'MTI Baths',name:'Andrew Martin Spa Suite',model:'MTI-AM174',price:'$15,400',raw:15400,comm:'15% commission · ~$2,310 per sale',commPct:'15%',rating:'4.9 (63 reviews)',desc:'The Andrew Martin Air Bath represents the pinnacle of spa bathing. 92 micro air jets deliver a champagne-like effervescence across your entire body, with heated surface technology to keep the water temperature perfect.',specs:[['Air Jets','92 micro air jets'],['Surface Heating','Yes — maintains temp'],['Material','Lucite acrylic'],['Dimensions','74" x 42" x 24"'],['Chromotherapy','Yes — 14-color LED'],['Warranty','Lifetime structural']],badge:'Highest Earn',bg:'linear-gradient(135deg,#121810,#0A0E08)'},
+  {id:'p7',link:'PASTE_AFFILIATE_LINK_HERE',cat:'smart',img:'',monogram:'K',emoji:'💡',brand:'Kohler',name:'Innate Intelligent Toilet',model:'K-5401-0',price:'$5,800',raw:5800,comm:'12% commission · ~$696 per sale',commPct:'12%',rating:'4.6 (211 reviews)',desc:'The Innate intelligent toilet features an integrated bidet with precision warm water cleansing, heated seat, auto deodorizer, automatic open/close lid, and hands-free flushing — all controlled by voice or app.',specs:[['Seat Heating','5 temperature levels'],['Water Heating','Tankless, instant warm'],['App Control','Kohler Konnect app'],['Voice','Alexa & Google compatible'],['Deodorizer','UV light + carbon filter'],['Warranty','3-year limited']],badge:'Smart Home',bg:'linear-gradient(135deg,#181610,#100E08)'},
+  {id:'p8',link:'PASTE_AFFILIATE_LINK_HERE',cat:'showers',img:'',monogram:'A',emoji:'🏊',brand:'Americh',name:'Summit Steam Shower',model:'AMR-SUMMIT',price:'$18,200',raw:18200,comm:'10% commission · ~$1,820 per sale',commPct:'10%',rating:'4.7 (48 reviews)',desc:'A complete walk-in steam shower system with built-in bench, chromotherapy lighting, digital control panel, and a 7.5kW steam generator — creating a private spa retreat in your home.',specs:[['Steam Generator','7.5kW — covers up to 400 cu ft'],['Dimensions','48" x 36" x 90"'],['Glass','10mm tempered safety glass'],['Chromotherapy','16.7M color LED system'],['Control','Digital touchscreen panel'],['Warranty','Lifetime frame + 5yr components']],badge:'Investment',bg:'linear-gradient(135deg,#101418,#080C10)'},
+];
+
+const BRANDS = ['Kohler','Bain Ultra','Victoria + Albert','Duravit','Grohe','MTI Baths','Americh','Neptune','Jason Intl','Hydro Systems','Jacuzzi','American Standard','Delta','Moen','TOTO','Hansgrohe','Rohl','Robern','Native Trails','Signature Hardware','DXV','Ronbow','James Martin','Strasser','Bertch','Klearvue','Bertch','KraftMaid','Foremost','Strasser','Madeli','Xylem','Bradford White','Takagi','Navien','Rinnai','A.O. Smith','Noritz','Bosch','Stiebel','Brondell','Bio Bidet','Toto Washlet','Brizo','Symmons','Watts','Viega','Oatey'];
+
+// ════════════════════════════════════════
+//  ARTICLES — Journal content store
+//  status: 'published' (visible in public Journal grid)
+//        | 'draft' (visible only in Article Studio drafts list)
+//  Pre-seeded with 6 published placeholder articles (no body yet —
+//  these were written before the AI Studio existed). New AI drafts
+//  get full body content and must be explicitly published.
+// ════════════════════════════════════════
+let articleIdCounter = 100;
+const ARTICLES = [
+  {id:'a1',status:'published',tag:'Buying Guide',title:'How to Choose a Freestanding Bathtub: The Complete 2026 Guide',date:'Apr 18, 2026',readTime:'8 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a2',status:'published',tag:'Affiliate Strategy',title:'How I Earned $8,400 in a Single Month Promoting Luxury Bathroom Products',date:'Apr 12, 2026',readTime:'6 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a3',status:'published',tag:'Design Inspiration',title:'The Spa Bathroom Trend That\'s Taking Over Luxury Homes in 2026',date:'Apr 5, 2026',readTime:'5 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a4',status:'published',tag:'Product Review',title:'Grohe vs. Hansgrohe: Which Shower System is Worth Your Affiliate Push?',date:'Mar 28, 2026',readTime:'7 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a5',status:'published',tag:'Brand Spotlight',title:'Inside Victoria + Albert: The British Brand Redefining Stone Bathtubs',date:'Mar 20, 2026',readTime:'6 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a6',status:'published',tag:'Affiliate Tips',title:'10 Instagram Strategies for High-Ticket Bathroom Affiliates (That Actually Work)',date:'Mar 14, 2026',readTime:'9 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+];
+
+
+
+const TESTIMONIALS = [
+  {quote:'I was skeptical at first — I\'d tried other affiliate programs and earned almost nothing. Within my first month with eBathtub, I referred a single Bain Ultra sale and earned <span class="highlight">$780 in commission</span>. That\'s more than I\'d made in a year on other platforms.',name:'Sarah M.',title:'Interior Design Blogger · 42K Instagram followers',emoji:'👩‍💼'},
+  {quote:'The AI posting tool alone is worth signing up for. I set up 30 days of Meta posts in about an hour, then forgot about it. The commissions <span class="highlight">just kept hitting my account</span>. This is genuinely passive income.',name:'Marcus T.',title:'Real Estate Agent & Side Hustler',emoji:'🧑‍💻'},
+  {quote:'As a plumber with 20 years of experience, I knew the products but had no idea how to monetize my knowledge online. eBathtub\'s affiliate program let me build a <span class="highlight">second income of $6,200/month</span> by the end of year one.',name:'Derek R.',title:'Master Plumber · YouTube Channel Owner',emoji:'🔧'},
+];
+
+// ════════════════════════════════════════
+//  CURSOR
+// ════════════════════════════════════════
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('button,a,[onclick]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='44px';ring.style.height='44px';ring.style.borderColor='rgba(184,150,106,.6)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='28px';ring.style.height='28px';ring.style.borderColor='rgba(184,150,106,.35)';});
+});
+
+// ════════════════════════════════════════
+//  NAV SCROLL
+// ════════════════════════════════════════
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);});
+
+// ════════════════════════════════════════
+//  MOBILE MENU
+// ════════════════════════════════════════
+let mobileOpen=false;
+function toggleMobileMenu(){
+  mobileOpen=!mobileOpen;
+  document.getElementById('mobile-menu').classList.toggle('open',mobileOpen);
+  const spans=document.querySelectorAll('.menu-toggle span');
+  if(mobileOpen){spans[0].style.transform='rotate(45deg) translate(4px,5px)';spans[1].style.opacity='0';spans[2].style.transform='rotate(-45deg) translate(4px,-5px)';}
+  else{spans.forEach(s=>{s.style.transform='';s.style.opacity='';});}
+}
+
+// ════════════════════════════════════════
+//  PAGE NAVIGATION
+// ════════════════════════════════════════
+function navigate(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  const map={home:'nl-home',shop:'nl-shop',editorial:'nl-editorial',about:'nl-about',contact:'nl-contact'};
+  if(map[id]) document.getElementById(map[id])?.classList.add('active');
+  if(id==='shop') renderShopProducts();
+  if(id==='editorial') renderEditorialAll();
+  if(id==='brands') renderBrandsPage();
+  setTimeout(initReveal,100);
+}
+
+// ════════════════════════════════════════
+//  RENDER HOME PRODUCTS
+// ════════════════════════════════════════
+let currentFilter='all';
+function renderProductGrid(containerId, products, max=8){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  el.innerHTML=products.slice(0,max).map(p=>`
+    <div class="prod-card" onclick="openProduct('${p.id}')">
+      <div class="prod-vis" style="background:${p.bg}">
+        <div class="media-frame">
+          <img src="${p.img||''}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'" onload="this.previousElementSibling?.remove?.();this.parentElement.querySelector('.media-ph')?.remove()">
+          <div class="media-ph">
+            <div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div>
+            <div class="media-ph-mono" style="font-size:2.4rem">${p.monogram||p.brand[0]}</div>
+            <div class="media-ph-label">${p.brand}</div>
+          </div>
+        </div>
+        ${p.badge?`<div class="prod-badge">${p.badge}</div>`:''}
+        <button class="prod-wishlist" onclick="event.stopPropagation();this.textContent='♥';this.style.color='var(--gold)';showToast('Wishlist','${p.name} added to wishlist.')">♡</button>
+        <div class="prod-overlay">
+          <div class="prod-brand">${p.brand}</div>
+          <div class="prod-name">${p.name}</div>
+          <div class="prod-price-row">
+            <div class="prod-price">${p.price}</div>
+            <div class="prod-comm">${p.commPct}</div>
+          </div>
+          <div class="prod-actions">
+            <button class="prod-btn prod-btn-primary" onclick="event.stopPropagation();handleShopNowId('${p.id}')">Shop Now</button>
+            <button class="prod-btn prod-btn-secondary" onclick="event.stopPropagation();openProduct('${p.id}')">Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(btn,cat){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter=cat;
+  const filtered=cat==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===cat);
+  renderProductGrid('home-products',filtered,8);
+  if(document.getElementById('shop-products'))renderProductGrid('shop-products',filtered,24);
+}
+
+function renderShopProducts(){
+  const filtered=currentFilter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===currentFilter);
+  renderProductGrid('shop-products',filtered,24);
+}
+
+// ════════════════════════════════════════
+//  RENDER BRANDS
+// ════════════════════════════════════════
+function renderBrands(containerId,count=12){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  el.innerHTML=BRANDS.slice(0,count).map(b=>`
+    <div class="brand-logo-cell" onclick="showToast('${b}','Viewing all ${b} products...')">
+      <div class="brand-name">${b}</div>
+    </div>
+  `).join('');
+}
+// NOTE: brand-logo-cell intentionally stays text-wordmark style (not photo) —
+// most brand logo assets require separate trademark/usage permission from
+// affiliate photo feeds, so this uses typeset wordmarks instead.
+function _renderBrandsPlaceholder(){}
+function renderBrandsPage(){renderBrands('brands-page-grid',48);}
+
+// ════════════════════════════════════════
+//  RENDER EDITORIAL
+// ════════════════════════════════════════
+function renderEditorial(containerId,count=3){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  const published=ARTICLES.filter(a=>a.status==='published');
+  el.innerHTML=published.slice(0,count).map((a,i)=>`
+    <div class="edit-card reveal${i>0?' reveal-delay-'+i:''}" onclick="openArticle('${a.id}')">
+      <div class="edit-vis">
+        <div class="media-frame">
+          <img src="" alt="${a.title}" loading="lazy" onerror="this.style.display='none'">
+          <div class="media-ph"><div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div><div class="media-ph-mono" style="font-size:2.2rem">${a.tag.split(' ').map(w=>w[0]).join('')}</div></div>
+        </div>
+      </div>
+      <div class="edit-tag">${a.tag}${a.aiAssisted?' · ✦ AI-Assisted':''}</div>
+      <div class="edit-h">${a.title}</div>
+      <div class="edit-meta"><span>${a.date}</span><span>${a.readTime}</span></div>
+    </div>
+  `).join('');
+}
+function renderEditorialAll(){renderEditorial('editorial-all',ARTICLES.filter(a=>a.status==='published').length);}
+
+// Converts a raw article body string into safe HTML:
+// - splits on blank lines into real <p> paragraphs (body was previously
+//   rendered with textContent, which collapsed all paragraph breaks)
+// - converts any [[PRODUCT:id]] markers (inserted by the AI Studio prompt)
+//   into a real link to that product's detail page, with the product's
+//   actual name/brand as the link text
+// - escapes HTML first so user/AI-generated text can never inject markup
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function renderArticleBody(body){
+  if(!body) return '<p>No content yet.</p>';
+  const escaped = escapeHtml(body);
+  const withLinks = escaped.replace(/\[\[PRODUCT:([a-zA-Z0-9_-]+)\]\]/g, (match, id) => {
+    const p = PRODUCTS.find(x => x.id === id);
+    if(!p) return ''; // unknown id — drop the marker rather than show broken text
+    return ` <a href="#" onclick="event.preventDefault();openProduct('${p.id}')" style="color:var(--gold);text-decoration:underline;">${p.brand} ${p.name}</a>`;
+  });
+  return withLinks.split(/\n\s*\n/).map(para => `<p>${para.trim()}</p>`).join('');
+}
+
+function openArticle(id){
+  const a=ARTICLES.find(x=>x.id===id);
+  if(!a)return;
+  document.getElementById('article-tag').textContent=a.tag;
+  document.getElementById('article-title').textContent=a.title;
+  document.getElementById('article-date').textContent=a.date;
+  document.getElementById('article-readtime').textContent=a.readTime;
+  document.getElementById('article-ai-badge').style.display=a.aiAssisted?'inline-flex':'none';
+  document.getElementById('article-content').innerHTML=renderArticleBody(a.body);
+  navigate('article');
+}
+
+// ════════════════════════════════════════
+//  ARTICLE STUDIO — AI draft generation
+//  Workflow: Generate → Draft (in drafts list) → Review modal
+//            → Publish (moves to public Journal) or Delete
+//  Drafts live only in-memory (the ARTICLES array) for this
+//  session — there is no backend, so refreshing the page will
+//  reset to the seeded published articles only.
+// ════════════════════════════════════════
+
+// ── ACCESS GATE CONFIG ──────────────────────────────────
+// CHANGE BOTH OF THESE before going live. Visit the site as:
+//   https://ebathtub.com/?studio=YOUR_SECRET_KEY
+// then enter the password below to unlock the Studio for that
+// browser session only (resets on tab close / page reload).
+// Reminder: this lives in client-side source and is a deterrent,
+// not real security — don't reuse a password used anywhere else.
+const STUDIO_SECRET_KEY = 'hIEwAXKCbcoJ';
+const STUDIO_PASSWORD = 'D8FbIIKZtakX';
+
+let studioUnlocked = false;
+let studioOpen=false;
+
+function checkStudioAccess(){
+  const params = new URLSearchParams(window.location.search);
+  const keyParam = params.get('studio');
+  if(keyParam && keyParam === STUDIO_SECRET_KEY){
+    document.getElementById('studio-gate-bg').classList.add('open');
+    setTimeout(()=>document.getElementById('studio-gate-password')?.focus(),100);
+  }
+  // If neither the URL key nor an unlocked session exists, the
+  // Studio banner/button and panel simply never appear — there is
+  // no visible trace of the feature for a normal visitor.
+}
+
+function attemptStudioUnlock(){
+  const input = document.getElementById('studio-gate-password');
+  const errEl = document.getElementById('studio-gate-error');
+  if(input.value === STUDIO_PASSWORD){
+    studioUnlocked = true;
+    document.getElementById('studio-gate-bg').classList.remove('open');
+    document.getElementById('studio-unlocked-banner').style.display = 'block';
+    errEl.textContent='';
+    input.value='';
+    showToast('Studio Unlocked','Admin tools are now visible on the Journal page for this session.');
+  }else{
+    errEl.textContent='Incorrect password.';
+    input.value='';
+    input.focus();
+  }
+}
+
+function toggleStudio(){
+  if(!studioUnlocked)return; // safety check — should be unreachable since the button only renders when unlocked
+  studioOpen=!studioOpen;
+  document.getElementById('studio-panel').classList.toggle('open',studioOpen);
+  if(studioOpen)renderDraftsList();
+}
+
+const TAG_LABELS={
+  'buying-guide':'Buying Guide','affiliate-strategy':'Affiliate Strategy','design-inspiration':'Design Inspiration',
+  'product-comparison':'Product Comparison','brand-spotlight':'Brand Spotlight','how-to':'How-To Guide'
+};
+const TOPIC_LABELS={
+  'freestanding-tubs':'freestanding bathtubs','soaking-tubs':'Japanese soaking tubs','shower-systems':'luxury shower systems',
+  'smart-bathroom':'smart bathroom technology','vanities':'designer bathroom vanities','steam-showers':'steam shower systems',
+  'spa-accessories':'spa and wellness bath accessories'
+};
+// Maps each Studio topic to the PRODUCTS category (or categories) it
+// should pull real product data from when building the generation prompt.
+// This is what lets a generated article reference actual products by
+// name/price/commission instead of writing generically about a category.
+const TOPIC_TO_CAT={
+  'freestanding-tubs':['bathtubs'],'soaking-tubs':['bathtubs'],'shower-systems':['showers'],
+  'smart-bathroom':['smart'],'vanities':['vanities'],'steam-showers':['showers'],
+  'spa-accessories':['spa']
+};
+const LENGTH_WORDS={short:'about 400 words',medium:'about 700 words',long:'about 1100 words'};
+const LENGTH_READTIME={short:'3 min read',medium:'5 min read',long:'8 min read'};
+
+async function generateArticleDraft(){
+  const btn=document.getElementById('studio-gen-btn');
+  const status=document.getElementById('studio-status');
+  btn.disabled=true;btn.classList.add('studio-gen-loading');
+  status.textContent='Generating draft — this can take 10–20 seconds…';
+
+  const type=document.getElementById('studio-type').value;
+  const topic=document.getElementById('studio-topic').value;
+  const length=document.getElementById('studio-length').value;
+  const tone=document.getElementById('studio-tone').value;
+  const angle=document.getElementById('studio-angle').value.trim();
+
+  const relevantProducts = (TOPIC_TO_CAT[topic]||[])
+    .flatMap(cat => PRODUCTS.filter(p => p.cat === cat))
+    .slice(0, 4);
+
+  const productContext = relevantProducts.length
+    ? relevantProducts.map(p =>
+        `- ${p.brand} ${p.name} (id: ${p.id}) — ${p.price}, ${p.comm}`
+      ).join('\n')
+    : 'No specific products available for this topic — write generally without naming specific products.';
+
+  const prompt=`You are writing an editorial article for eBathtub.com, a luxury affiliate site covering premium bathroom products.
+
+Article type: ${TAG_LABELS[type]}
+Topic focus: ${TOPIC_LABELS[topic]}
+Tone: ${tone==='luxury'?'Luxury and editorial — sophisticated but not stuffy':tone==='friendly'?'Friendly, conversational, approachable':'Expert and technical, written for an informed reader'}
+Target length: ${LENGTH_WORDS[length]}
+${angle?`Specific angle to emphasize: ${angle}`:''}
+
+Real products currently sold on eBathtub.com relevant to this topic (use these — do not invent other named products):
+${productContext}
+
+Requirements:
+- Start with a strong, specific headline (no generic "Ultimate Guide" cliches)
+- Write genuinely useful, specific content — real considerations a homeowner or affiliate would care about, not vague filler
+- Naturally reference 2-3 of the real products listed above by name where it fits the content (not forced into every paragraph). When you mention one, immediately follow the product name with a marker in this exact format: [[PRODUCT:id]] — for example "the Kohler Underscore 72\" Freestanding [[PRODUCT:p1]] offers..." This marker will be converted into a real link automatically — do not describe it as a link or tell the reader to click it.
+- Use clear paragraph breaks. You may use a few short subheadings if it's a buying guide or comparison.
+- Do not invent specific named studies, statistics, or quotes that could be factually wrong — keep claims general and defensible
+- Use only the exact prices and commission figures given above for named products — do not invent or alter them
+- If no real products were provided above, do not invent product names — write about the category generally instead
+- End with a natural call to action relevant to eBathtub.com (browsing the shop, or for affiliate-strategy pieces, joining the affiliate program)
+- This is a DRAFT that a human will review before publishing — write it as final-quality copy, not a rough outline
+
+Return your response as plain text in exactly this format (no markdown, no code fences):
+HEADLINE: [headline here]
+---
+[article body here, paragraphs separated by blank lines]`;
+
+  try{
+    const response=await fetch("/api/generate-article",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({prompt:prompt})
+    });
+    if(!response.ok){
+      const errData=await response.json().catch(()=>({}));
+      throw new Error(errData.error||('Request failed: '+response.status));
+    }
+    const data=await response.json();
+    const text=data.text||'';
+    const [headlinePart,...bodyParts]=text.split('---');
+    const headline=(headlinePart||'').replace(/^HEADLINE:\s*/i,'').trim()||'Untitled Draft';
+    const body=bodyParts.join('---').trim()||text.trim()||'Generation failed — please try again.';
+
+    const newId='draft-'+(++articleIdCounter);
+    const today=new Date();
+    ARTICLES.unshift({
+      id:newId,status:'draft',tag:TAG_LABELS[type],
+      title:headline,
+      date:today.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+      readTime:LENGTH_READTIME[length],aiAssisted:true,body:body
+    });
+    status.textContent='Draft created ✓ Review it below before publishing.';
+    renderDraftsList();
+    reviewDraft(newId);
+  }catch(err){
+    status.textContent='';
+    showToast('Generation Failed','Could not reach the AI service. Please try again.',true);
+  }finally{
+    btn.disabled=false;btn.classList.remove('studio-gen-loading');
+  }
+}
+
+function renderDraftsList(){
+  const el=document.getElementById('drafts-list');
+  if(!el)return;
+  if(ARTICLES.length===0){el.innerHTML='<div style="font-size:.8rem;color:var(--stone);padding:16px 0;">No articles yet.</div>';return;}
+  el.innerHTML=ARTICLES.map(a=>`
+    <div class="draft-row">
+      <div class="draft-status ${a.status}">${a.status}</div>
+      <div>
+        <div class="draft-title">${a.title}</div>
+        <div class="draft-meta">${a.tag} · ${a.date}${a.aiAssisted?' · ✦ AI-generated':''}</div>
+      </div>
+      <div class="draft-actions">
+        ${a.status==='draft'?`<button class="draft-btn draft-btn-review" onclick="reviewDraft('${a.id}')">Review</button>`:`<button class="draft-btn draft-btn-review" onclick="openArticle('${a.id}')">View Live</button>`}
+      </div>
+      <div class="draft-actions">
+        ${a.status==='draft'?`<button class="draft-btn draft-btn-publish" onclick="publishDraft('${a.id}')">Publish</button>`:`<button class="draft-btn draft-btn-delete" onclick="unpublishDraft('${a.id}')">Unpublish</button>`}
+      </div>
+    </div>
+  `).join('');
+}
+
+let reviewingId=null;
+function reviewDraft(id){
+  const a=ARTICLES.find(x=>x.id===id);
+  if(!a)return;
+  reviewingId=id;
+  document.getElementById('review-title').textContent=a.title;
+  document.getElementById('review-content').innerHTML=renderArticleBody(a.body);
+  document.getElementById('review-modal-bg').classList.add('open');
+}
+function closeReviewModal(){
+  document.getElementById('review-modal-bg').classList.remove('open');
+  reviewingId=null;
+}
+function publishDraftFromModal(){
+  if(reviewingId)publishDraft(reviewingId);
+  closeReviewModal();
+}
+function deleteDraftFromModal(){
+  if(reviewingId){
+    const idx=ARTICLES.findIndex(x=>x.id===reviewingId);
+    if(idx>-1)ARTICLES.splice(idx,1);
+    renderDraftsList();
+    showToast('Draft Deleted','The draft has been removed.');
+  }
+  closeReviewModal();
+}
+function publishDraft(id){
+  const a=ARTICLES.find(x=>x.id===id);
+  if(!a)return;
+  a.status='published';
+  renderDraftsList();
+  renderEditorialAll();
+  renderEditorial('home-editorial',3);
+  showToast('Published! 🎉','Your article is now live on the Journal.');
+}
+function unpublishDraft(id){
+  const a=ARTICLES.find(x=>x.id===id);
+  if(!a)return;
+  a.status='draft';
+  renderDraftsList();
+  renderEditorialAll();
+  renderEditorial('home-editorial',3);
+  showToast('Unpublished','Article moved back to drafts.');
+}
+
+// ════════════════════════════════════════
+//  TESTIMONIALS
+// ════════════════════════════════════════
+let testiIdx=0;
+function renderTestimonials(){
+  const track=document.getElementById('testi-track');
+  const dots=document.getElementById('testi-dots');
+  if(!track)return;
+  track.innerHTML=TESTIMONIALS.map(t=>`
+    <div class="testi-slide">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"${t.quote}"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">${t.emoji}</div>
+        <div><div class="testi-info-name">${t.name}</div><div class="testi-info-title">${t.title}</div></div>
+      </div>
+    </div>
+  `).join('');
+  dots.innerHTML=TESTIMONIALS.map((_,i)=>`<div class="testi-dot${i===0?' active':''}" onclick="goTesti(${i})"></div>`).join('');
+  setInterval(()=>goTesti((testiIdx+1)%TESTIMONIALS.length),6000);
+}
+function goTesti(i){
+  testiIdx=i;
+  document.getElementById('testi-track').style.transform=`translateX(-${i*100}%)`;
+  document.querySelectorAll('.testi-dot').forEach((d,j)=>d.classList.toggle('active',i===j));
+}
+
+// ════════════════════════════════════════
+//  PRODUCT DETAIL
+// ════════════════════════════════════════
+let currentProduct=null;
+function openProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p)return;
+  currentProduct=p;
+  document.getElementById('pd-breadcrumb-cat').textContent=p.brand;
+  document.getElementById('pd-brand').textContent=p.brand;
+  document.getElementById('pd-name').textContent=p.name;
+  document.getElementById('pd-model').textContent='Model: '+p.model;
+  document.getElementById('pd-rating').textContent=p.rating;
+  document.getElementById('pd-price').textContent=p.price;
+  document.getElementById('pd-comm').textContent=p.comm;
+  document.getElementById('pd-desc').textContent=p.desc;
+  document.getElementById('pd-img').src=p.img||'';
+  document.getElementById('pd-img').alt=p.name;
+  document.getElementById('pd-img').style.display='';
+  document.getElementById('pd-ph').style.display='';
+  document.getElementById('pd-vis-mono').textContent=p.monogram||p.brand[0];
+  document.getElementById('pd-vis-brandlabel').textContent=p.brand;
+  document.getElementById('pd-vis-col').style.background=p.bg;
+  document.getElementById('pd-specs').innerHTML=`<div style="margin-bottom:12px;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)">Specifications</div>`+
+    p.specs.map(s=>`<div class="pd-spec-row"><div class="pd-spec-key">${s[0]}</div><div class="pd-spec-val">${s[1]}</div></div>`).join('');
+  document.getElementById('pd-vis-thumbs').innerHTML=
+    [0,1,2,3].map((_,i)=>`<div class="pd-thumb${i===0?' active':''}" onclick="document.querySelectorAll('.pd-thumb').forEach((t,j)=>t.classList.toggle('active',j===${i}))">${p.monogram||p.brand[0]}</div>`).join('');
+  navigate('product');
+  // If this product has a real Amazon ASIN, try to fetch its real, licensed
+  // product image. This never blocks the page render above \u2014 it's a
+  // progressive upgrade. If the API isn't configured yet (no credentials)
+  // or the fetch fails for any reason, the existing styled placeholder
+  // (already shown above) simply stays as-is.
+  if(p.amazonAsin){
+    fetchAmazonProductImage(p);
+  }
+}
+
+// Calls the Amazon Creators API proxy function for a product with a real ASIN.
+// Safe to call speculatively \u2014 handles the "not configured yet" state,
+// network failures, and the case where the user has navigated away to a
+// different product before the response comes back.
+async function fetchAmazonProductImage(p){
+  try{
+    const response=await fetch('/api/get-amazon-products',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({asins:[p.amazonAsin]})
+    });
+    if(!response.ok)return; // fail silently \u2014 placeholder already showing
+    const data=await response.json();
+    if(data.apiAccessPending){
+      console.info(`[eBathtub] Amazon Creators API not configured yet \u2014 showing placeholder for "${p.name}".`);
+      return;
+    }
+    const item=data.items?.find(x=>x.asin===p.amazonAsin);
+    if(!item||!item.image)return;
+    // Only update the image if the user is still viewing THIS product
+    // (they may have clicked to a different product while this was loading)
+    if(currentProduct?.id===p.id){
+      const img=document.getElementById('pd-img');
+      img.src=item.image;
+      img.onload=()=>{document.getElementById('pd-ph').style.display='none';};
+    }
+  }catch(err){
+    console.warn('[eBathtub] Amazon product image fetch failed:',err);
+    // placeholder remains visible \u2014 no user-facing error needed
+  }
+}
+// ── AFFILIATE LINK HANDLING ──────────────────────────────
+// Each product's `link` field holds its real affiliate/tracking URL.
+// Until real URLs are pasted in, this stays as the placeholder string
+// below — handleShopNowId/handleShopNow check for that placeholder and
+// fall back to a toast instead of opening a dead/fake link.
+const AFFILIATE_LINK_PLACEHOLDER = 'PASTE_AFFILIATE_LINK_HERE';
+
+// In-memory click log — resets on page reload (no backend yet).
+// Useful for a quick console check during testing: run
+// `affiliateClickLog` in devtools to see what's been clicked this session.
+const affiliateClickLog = [];
+
+function openAffiliateLink(p){
+  if(!p){
+    showToast('Affiliate Link','Product not found.',true);
+    return;
+  }
+  if(!p.link || p.link === AFFILIATE_LINK_PLACEHOLDER){
+    console.warn(`[eBathtub] No real affiliate link set for "${p.name}" (id: ${p.id}). Add a real URL to the "link" field in PRODUCTS before launch.`);
+    showToast('Affiliate Link','This product\'s affiliate link hasn\'t been added yet.',true);
+    return;
+  }
+  affiliateClickLog.push({id:p.id,name:p.name,brand:p.brand,time:new Date().toISOString()});
+  showToast('Redirecting…','Opening '+p.brand+' '+p.name+'...');
+  window.open(p.link,'_blank','noopener,noreferrer');
+}
+
+function handleShopNow(){openAffiliateLink(currentProduct);}
+function handleShopNowId(id){openAffiliateLink(PRODUCTS.find(x=>x.id===id));}
+
+// ════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════
+let toastTimer;
+function showToast(title,msg,isErr=false){
+  clearTimeout(toastTimer);
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-msg').textContent=msg;
+  document.getElementById('toast').style.borderLeftColor=isErr?'var(--error)':'var(--gold)';
+  document.getElementById('toast').classList.add('show');
+  toastTimer=setTimeout(()=>document.getElementById('toast').classList.remove('show'),3500);
+}
+
+// ════════════════════════════════════════
+//  FORMS
+// ════════════════════════════════════════
+// ════════════════════════════════════════
+//  FORMSPREE ENDPOINTS
+//  Replace these with your real form IDs from
+//  formspree.io → your form → Integration tab
+//  e.g. 'https://formspree.io/f/xpzvaebr'
+// ════════════════════════════════════════
+const FORMSPREE = {
+  newsletter: 'https://formspree.io/f/xgojvqdn',
+  contact:    'https://formspree.io/f/mojovbrn',
+  affiliate:  'https://formspree.io/f/xzdlzwog',
+};
+
+async function submitToFormspree(endpoint, formEl, formData){
+  if(endpoint.includes('YOUR_')){
+    showToast('Setup Needed','Add your Formspree endpoint in the code before this form can send.',true);
+    return false;
+  }
+  try{
+    const res = await fetch(endpoint, {
+      method:'POST',
+      headers:{'Accept':'application/json'},
+      body: formData
+    });
+    if(res.ok) return true;
+    const data = await res.json().catch(()=>({}));
+    throw new Error(data?.errors?.[0]?.message || 'Submission failed');
+  }catch(err){
+    showToast('Something Went Wrong', err.message || 'Please try again in a moment.', true);
+    return false;
+  }
+}
+
+function setSubmitLoading(formEl, loading, idleLabel){
+  const btn = formEl.querySelector('button[type="submit"]');
+  if(!btn)return;
+  btn.disabled = loading;
+  btn.textContent = loading ? 'Sending…' : idleLabel;
+}
+
+async function handleNewsletter(e){
+  e.preventDefault();
+  const form = e.target;
+  const fd = new FormData(form);
+  fd.append('_subject','New eBathtub Newsletter Signup');
+  setSubmitLoading(form,true,'Subscribe');
+  const ok = await submitToFormspree(FORMSPREE.newsletter, form, fd);
+  setSubmitLoading(form,false,'Subscribe');
+  if(ok){
+    showToast('Subscribed! 🎉','Welcome to the eBathtub newsletter. Check your inbox.');
+    form.reset();
+  }
+}
+
+async function handleContact(e){
+  e.preventDefault();
+  const form = e.target;
+  const fd = new FormData(form);
+  fd.append('_subject','New Contact Form Submission — eBathtub');
+  setSubmitLoading(form,true,'Send Message →');
+  const ok = await submitToFormspree(FORMSPREE.contact, form, fd);
+  setSubmitLoading(form,false,'Send Message →');
+  if(ok){
+    showToast('Message Sent!','We\'ll get back to you within 24 hours.');
+    form.reset();
+  }
+}
+
+async function handleAffiliateApply(e){
+  e.preventDefault();
+  const form = e.target;
+  const fd = new FormData(form);
+  fd.append('_subject','New Affiliate Application — eBathtub');
+  setSubmitLoading(form,true,'Submit Application →');
+  const ok = await submitToFormspree(FORMSPREE.affiliate, form, fd);
+  setSubmitLoading(form,false,'Submit Application →');
+  if(ok){
+    showToast('Application Received! 🎉','Check your email within 24 hours for approval.');
+    form.reset();
+  }
+}
+
+// ════════════════════════════════════════
+//  SCROLL REVEAL
+// ════════════════════════════════════════
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+  },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>{el.classList.remove('in');obs.observe(el);});
+}
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+renderProductGrid('home-products',PRODUCTS,8);
+renderBrands('brands-grid',12);
+renderEditorial('home-editorial',3);
+renderTestimonials();
+initReveal();
+setTimeout(initReveal,400);
+checkStudioAccess();
+</script>
+</body>
+</html>
