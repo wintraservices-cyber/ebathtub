@@ -2460,7 +2460,8 @@ HEADLINE: [headline here]
     reviewDraft(newId);
   }catch(err){
     status.textContent='';
-    showToast('Generation Failed','Could not reach the AI service. Please try again.',true);
+    console.error('[eBathtub Studio] Generation error:', err);
+    showToast('Generation Failed', err.message || 'Could not reach the AI service. Please try again.', true);
   }finally{
     btn.disabled=false;btn.classList.remove('studio-gen-loading');
   }

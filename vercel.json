@@ -1,5 +1,13 @@
 {
   "version": 2,
+  "functions": {
+    "api/generate-article.js": {
+      "maxDuration": 30
+    },
+    "api/get-amazon-products.js": {
+      "maxDuration": 15
+    }
+  },
   "routes": [
     {
       "src": "/api/(.*)",

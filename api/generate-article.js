@@ -34,7 +34,7 @@ module.exports = async function handler(req, res) {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
           temperature: 0.7,
-          maxOutputTokens: 4000,
+          maxOutputTokens: 2000,
         },
       }),
     });
