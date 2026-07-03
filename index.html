@@ -2075,12 +2075,12 @@ const BRANDS = ['Kohler','Bain Ultra','Victoria + Albert','Duravit','Grohe','MTI
 // ════════════════════════════════════════
 let articleIdCounter = 100;
 const ARTICLES = [
-  {id:'a1',status:'published',tag:'Buying Guide',title:'How to Choose a Freestanding Bathtub: The Complete 2026 Guide',date:'Apr 18, 2026',readTime:'8 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
-  {id:'a2',status:'published',tag:'Affiliate Strategy',title:'How I Earned $8,400 in a Single Month Promoting Luxury Bathroom Products',date:'Apr 12, 2026',readTime:'6 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
-  {id:'a3',status:'published',tag:'Design Inspiration',title:'The Spa Bathroom Trend That\'s Taking Over Luxury Homes in 2026',date:'Apr 5, 2026',readTime:'5 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
-  {id:'a4',status:'published',tag:'Product Review',title:'Grohe vs. Hansgrohe: Which Shower System is Worth Your Affiliate Push?',date:'Mar 28, 2026',readTime:'7 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
-  {id:'a5',status:'published',tag:'Brand Spotlight',title:'Inside Victoria + Albert: The British Brand Redefining Stone Bathtubs',date:'Mar 20, 2026',readTime:'6 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
-  {id:'a6',status:'published',tag:'Affiliate Tips',title:'10 Instagram Strategies for High-Ticket Bathroom Affiliates (That Actually Work)',date:'Mar 14, 2026',readTime:'9 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a1',status:'draft',tag:'Buying Guide',title:'How to Choose a Freestanding Bathtub: The Complete 2026 Guide',date:'Apr 18, 2026',readTime:'8 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a2',status:'draft',tag:'Affiliate Strategy',title:'How I Earned $8,400 in a Single Month Promoting Luxury Bathroom Products',date:'Apr 12, 2026',readTime:'6 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a3',status:'draft',tag:'Design Inspiration',title:'The Spa Bathroom Trend That\'s Taking Over Luxury Homes in 2026',date:'Apr 5, 2026',readTime:'5 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a4',status:'draft',tag:'Product Review',title:'Grohe vs. Hansgrohe: Which Shower System is Worth Your Affiliate Push?',date:'Mar 28, 2026',readTime:'7 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a5',status:'draft',tag:'Brand Spotlight',title:'Inside Victoria + Albert: The British Brand Redefining Stone Bathtubs',date:'Mar 20, 2026',readTime:'6 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
+  {id:'a6',status:'draft',tag:'Affiliate Tips',title:'10 Instagram Strategies for High-Ticket Bathroom Affiliates (That Actually Work)',date:'Mar 14, 2026',readTime:'9 min read',aiAssisted:false,body:'This article was published before the Article Studio existed and has no AI-drafted body yet. Use Article Studio to generate full replacement content for this slot, or write it manually.'},
 ];
 
 
@@ -2482,6 +2482,40 @@ function publishDraft(id){
   renderEditorialAll();
   renderEditorial('home-editorial',3);
   showToast('Published! 🎉','Your article is now live on the Journal.');
+  // Save to Sanity so it persists across page reloads
+  saveArticleToSanity(a);
+}
+
+// Saves a published article to Sanity CMS.
+// Runs silently after publish — if it fails, the article is still
+// published in the current session, and a console warning tells you
+// to save it manually in Sanity Studio.
+async function saveArticleToSanity(a){
+  try{
+    const response = await fetch('/api/save-article', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        title: a.title,
+        body: a.body,
+        tag: a.tag,
+        readTime: a.readTime,
+        aiAssisted: a.aiAssisted !== false,
+        status: 'published',
+      }),
+    });
+    const data = await response.json();
+    if(!response.ok){
+      console.warn('[eBathtub Studio] Sanity save failed — article is live this session but not persisted.',data.error);
+      showToast('⚠️ Save Warning','Article published locally but not saved to CMS. Check Vercel logs.',true);
+      return;
+    }
+    console.info('[eBathtub Studio] Article saved to Sanity ✓ ID:',data.sanityId,'Slug:',data.slug);
+    showToast('Saved to CMS ✓','Article is now permanent in Sanity.');
+  }catch(err){
+    console.warn('[eBathtub Studio] Could not reach save-article function:',err.message);
+    showToast('⚠️ CMS Unreachable','Article is live this session. Save manually in Sanity Studio.',true);
+  }
 }
 function unpublishDraft(id){
   const a=ARTICLES.find(x=>x.id===id);
@@ -2803,8 +2837,12 @@ async function loadSanityData(){
     }
 
   }catch(err){
-    // Silent fallback — hardcoded data stays in place
+    // Silent fallback for visitors — hardcoded data stays in place
     console.warn('[eBathtub] Sanity fetch failed, using local data:', err.message);
+    // If Studio is unlocked, show a visible warning so admin knows CMS isn't connected
+    if(studioUnlocked){
+      showToast('⚠️ CMS Not Connected','Sanity failed to load. Check env vars in Vercel dashboard.',true);
+    }
   }
 }
 
