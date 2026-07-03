@@ -1017,15 +1017,14 @@ footer{
   <div class="nav-center">
     <a class="nav-link active" onclick="navigate('home')" id="nl-home">Home</a>
     <a class="nav-link" onclick="navigate('shop')" id="nl-shop">Shop</a>
-    <a class="nav-link" onclick="navigate('brands')">Brands</a>
-    <a class="nav-link" onclick="navigate('editorial')" id="nl-editorial">Editorial</a>
+    <a class="nav-link" onclick="navigate('editorial')" id="nl-editorial">Journal</a>
     <a class="nav-link" onclick="navigate('about')" id="nl-about">About</a>
     <a class="nav-link" onclick="navigate('contact')" id="nl-contact">Contact</a>
   </div>
   <div class="nav-right">
     <button class="nav-icon-btn" onclick="showToast('Search','Use the search bar to find products.')" title="Search">🔍</button>
     <button class="nav-icon-btn" onclick="showToast('Wishlist','Your wishlist is empty.')" title="Wishlist">♡</button>
-    <button class="nav-cta" onclick="navigate('affiliate')">Affiliate Portal</button>
+    <button class="nav-cta" onclick="navigate('shop')">Shop Now</button>
   </div>
   <button class="menu-toggle" id="menu-toggle" onclick="toggleMobileMenu()">
     <span></span><span></span><span></span>
@@ -1036,10 +1035,9 @@ footer{
 <div class="mobile-menu" id="mobile-menu">
   <a class="mobile-nav-link" onclick="navigate('home');toggleMobileMenu()">Home</a>
   <a class="mobile-nav-link" onclick="navigate('shop');toggleMobileMenu()">Shop</a>
-  <a class="mobile-nav-link" onclick="navigate('editorial');toggleMobileMenu()">Editorial</a>
+  <a class="mobile-nav-link" onclick="navigate('editorial');toggleMobileMenu()">Journal</a>
   <a class="mobile-nav-link" onclick="navigate('about');toggleMobileMenu()">About</a>
   <a class="mobile-nav-link" onclick="navigate('contact');toggleMobileMenu()">Contact</a>
-  <a class="mobile-nav-link" onclick="navigate('affiliate');toggleMobileMenu()">Affiliate</a>
 </div>
 
 <!-- ══════════════════════ HOME PAGE ══════════════════════ -->
@@ -1055,7 +1053,7 @@ footer{
       <p class="hero-desc">Curated high-ticket bathroom products from the world's most prestigious brands — Kohler, Bain Ultra, Victoria + Albert, Duravit, and beyond.</p>
       <div class="hero-ctas">
         <button class="btn-gold" onclick="navigate('shop')">Explore Collection</button>
-        <button class="btn-ghost" onclick="navigate('affiliate')">Become an Affiliate</button>
+        <button class="btn-ghost" onclick="navigate('editorial')">Read Our Guides</button>
       </div>
     </div>
     <div class="hero-right">
@@ -1212,43 +1210,6 @@ footer{
     <div class="testi-dots" id="testi-dots"></div>
   </section>
 
-  <!-- Affiliate Program CTA -->
-  <section class="section" style="padding-bottom:0">
-    <div class="program-grid">
-      <div class="program-left reveal">
-        <div class="section-tag" style="margin-bottom:20px">Affiliate Program</div>
-        <h2 class="section-h" style="margin-bottom:20px">Earn <em>More</em> on<br>Every Referral</h2>
-        <p style="color:var(--stone2);font-weight:200;line-height:1.75;font-size:.88rem;margin-bottom:36px;">Join a growing community of affiliates earning with eBathtub. Our high-ticket products mean you earn real commissions on every sale — not cents, but hundreds or thousands per referral.</p>
-        <div class="comm-showcase">
-          <div class="comm-card"><div class="comm-pct">15%</div><div class="comm-label">Max Rate</div></div>
-          <div class="comm-card"><div class="comm-pct">$1,440</div><div class="comm-label">One Sale Example</div></div>
-          <div class="comm-card"><div class="comm-pct">90</div><div class="comm-label">Day Cookie</div></div>
-          <div class="comm-card"><div class="comm-pct">48h</div><div class="comm-label">Payout Speed</div></div>
-        </div>
-        <button class="btn-gold" onclick="navigate('affiliate')">Join the Program →</button>
-      </div>
-      <div class="program-right reveal reveal-delay-2">
-        <div class="program-steps">
-          <div class="prog-step">
-            <div class="prog-num">01</div>
-            <div><div class="prog-step-h">Apply in 60 Seconds</div><div class="prog-step-p">Fill out our quick affiliate application. Approval typically within 24 hours. No experience required — we'll train you.</div></div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-num">02</div>
-            <div><div class="prog-step-h">Get Your Unique Links</div><div class="prog-step-p">Access your personal dashboard with unique tracking links for every product and category on the site.</div></div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-num">03</div>
-            <div><div class="prog-step-h">Share on Social, Email & Blog</div><div class="prog-step-p">Promote through any channel. Use our AI-powered Meta automation tool to post daily without extra effort.</div></div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-num">04</div>
-            <div><div class="prog-step-h">Earn High-Ticket Commissions</div><div class="prog-step-p">A $12,000 bathtub sale at 12% = $1,440 in your pocket. All commissions paid within 48 hours of confirmation.</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Newsletter -->
   <section class="section nl-section">
@@ -1287,14 +1248,14 @@ footer{
         </div>
       </div>
       <div>
-        <div class="footer-col-h">Affiliate</div>
+        <div class="footer-col-h">Guides</div>
         <div class="footer-links">
-          <a class="footer-link" onclick="navigate('affiliate')">Join Program</a>
-          <a class="footer-link" onclick="navigate('affiliate')">Commission Rates</a>
-          <a class="footer-link" onclick="navigate('affiliate')">Dashboard</a>
-          <a class="footer-link" onclick="navigate('affiliate')">Meta Automation</a>
-          <a class="footer-link" onclick="navigate('affiliate')">Leaderboard</a>
-          <a class="footer-link" onclick="navigate('affiliate')">Resources</a>
+          <a class="footer-link" onclick="navigate('editorial')">Buying Guides</a>
+          <a class="footer-link" onclick="navigate('editorial')">Product Reviews</a>
+          <a class="footer-link" onclick="navigate('editorial')">Comparisons</a>
+          <a class="footer-link" onclick="navigate('editorial')">Design Inspiration</a>
+          <a class="footer-link" onclick="navigate('editorial')">How-To Articles</a>
+          <a class="footer-link" onclick="navigate('editorial')">Brand Spotlights</a>
         </div>
       </div>
       <div>
@@ -1499,7 +1460,6 @@ footer{
       <div class="legal-cross-links">
         <a onclick="navigate('editorial')">← Back to Journal</a>
         <a onclick="navigate('shop')">Browse Products</a>
-        <a onclick="navigate('affiliate')">Become an Affiliate</a>
       </div>
     </div>
   </div>
@@ -2776,6 +2736,80 @@ renderTestimonials();
 initReveal();
 setTimeout(initReveal,400);
 checkStudioAccess();
+
+// ════════════════════════════════════════
+//  SANITY CMS DATA LOADER
+//  Fetches live products, articles, and brands from Sanity.
+//  Falls back to hardcoded arrays silently if fetch fails.
+//  Runs after initial render so the page is never blank.
+// ════════════════════════════════════════
+async function loadSanityData(){
+  try{
+    const res = await fetch('/api/get-sanity-data');
+    if(!res.ok) throw new Error('Sanity fetch returned '+res.status);
+    const data = await res.json();
+
+    let updated = false;
+
+    // Update PRODUCTS if Sanity returned any
+    if(data.products && data.products.length > 0){
+      // Preserve existing IDs for compatibility with openProduct()
+      data.products.forEach((p,i) => {
+        if(!p.id) p.id = 'p'+(i+1);
+        // Ensure specs are in [label, value] array format
+        if(p.specs && p.specs[0] && typeof p.specs[0] === 'object' && !Array.isArray(p.specs[0])){
+          p.specs = p.specs.map(s => [s['0']||s.label, s['1']||s.value]);
+        }
+      });
+      PRODUCTS.length = 0;
+      PRODUCTS.push(...data.products);
+      updated = true;
+      console.info('[eBathtub] Loaded '+PRODUCTS.length+' products from Sanity');
+    }
+
+    // Update ARTICLES if Sanity returned any
+    if(data.articles && data.articles.length > 0){
+      // Keep any in-session AI drafts that aren't in Sanity yet
+      const drafts = ARTICLES.filter(a => a.id && a.id.startsWith('draft-'));
+      ARTICLES.length = 0;
+      ARTICLES.push(...data.articles, ...drafts);
+      updated = true;
+      console.info('[eBathtub] Loaded '+data.articles.length+' articles from Sanity');
+    }
+
+    // Update BRANDS if Sanity returned any
+    if(data.brands && data.brands.length > 0){
+      BRANDS.length = 0;
+      BRANDS.push(...data.brands);
+      updated = true;
+      console.info('[eBathtub] Loaded '+BRANDS.length+' brands from Sanity');
+    }
+
+    // Re-render all components with live data
+    if(updated){
+      renderProductGrid('home-products', PRODUCTS.filter(p=>p.featured), 4);
+      renderProductGrid('featured-products', PRODUCTS.filter(p=>p.featured), 4);
+      renderBrands('brands-grid', 12);
+      renderEditorial('home-editorial', 3);
+      // Re-render whichever page is currently active
+      const activePage = document.querySelector('.page.active');
+      if(activePage){
+        const pageId = activePage.id.replace('page-','');
+        if(pageId==='shop') renderShopProducts();
+        if(pageId==='editorial') renderEditorialAll();
+        if(pageId==='brands') renderBrandsPage();
+      }
+      setTimeout(initReveal, 200);
+    }
+
+  }catch(err){
+    // Silent fallback — hardcoded data stays in place
+    console.warn('[eBathtub] Sanity fetch failed, using local data:', err.message);
+  }
+}
+
+// Load Sanity data after a short delay so initial paint completes first
+setTimeout(loadSanityData, 500);
 </script>
 </body>
 </html>
