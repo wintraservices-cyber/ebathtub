@@ -1,10 +1,18 @@
 {
+  "buildCommand": null,
+  "outputDirectory": ".",
   "functions": {
     "api/generate-article.js": {
       "maxDuration": 30
     },
     "api/get-amazon-products.js": {
       "maxDuration": 15
+    },
+    "api/get-sanity-data.js": {
+      "maxDuration": 10
+    },
+    "api/save-article.js": {
+      "maxDuration": 10
     }
   }
 }
