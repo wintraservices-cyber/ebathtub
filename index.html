@@ -1338,7 +1338,7 @@ footer{
         </div>
         <div class="pd-price-block">
           <div class="pd-price" id="pd-price"></div>
-          <div class="pd-comm-note" id="pd-comm"></div>
+          <div class="pd-comm-note" id="pd-comm" style="display:none"></div>
         </div>
         <p class="pd-desc" id="pd-desc"></p>
         <div class="pd-specs" id="pd-specs"></div>
@@ -2157,7 +2157,6 @@ function renderProductGrid(containerId, products, max=8){
           <div class="prod-name">${p.name}</div>
           <div class="prod-price-row">
             <div class="prod-price">${p.price}</div>
-            <div class="prod-comm">${p.commPct}</div>
           </div>
           <div class="prod-actions">
             <button class="prod-btn prod-btn-primary" onclick="event.stopPropagation();handleShopNowId('${p.id}')">Shop Now</button>
@@ -2562,7 +2561,7 @@ function openProduct(id){
   document.getElementById('pd-model').textContent='Model: '+p.model;
   document.getElementById('pd-rating').textContent=p.rating;
   document.getElementById('pd-price').textContent=p.price;
-  document.getElementById('pd-comm').textContent=p.comm;
+  document.getElementById('pd-comm').textContent='';
   document.getElementById('pd-desc').textContent=p.desc;
   document.getElementById('pd-img').src=p.img||'';
   document.getElementById('pd-img').alt=p.name;
