@@ -2205,7 +2205,7 @@ function renderEditorial(containerId,count=3){
     <div class="edit-card reveal${i>0?' reveal-delay-'+i:''}" onclick="openArticle('${a.id}')">
       <div class="edit-vis">
         <div class="media-frame">
-          <img src="" alt="${a.title}" loading="lazy" onerror="this.style.display='none'">
+          <img src="${a.img||''}" alt="${a.title}" loading="lazy" onerror="this.style.display='none'" ${a.img?`onload="this.parentElement.querySelector('.media-ph').style.display='none'"`:''}>
           <div class="media-ph"><div class="media-ph-frame"><span class="media-ph-corner tl"></span><span class="media-ph-corner br"></span></div><div class="media-ph-mono" style="font-size:2.2rem">${a.tag.split(' ').map(w=>w[0]).join('')}</div></div>
         </div>
       </div>
