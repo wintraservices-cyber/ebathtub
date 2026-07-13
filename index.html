@@ -64,7 +64,7 @@ button{font-family:var(--font-body);cursor:none;border:none;background:none;}
 }
 .media-frame img{
   width:100%;height:100%;object-fit:cover;
-  position:relative;z-index:2;
+  position:relative;z-index:1;
 }
 .media-ph{
   position:absolute;inset:0;
@@ -596,7 +596,7 @@ button{font-family:var(--font-body);cursor:none;border:none;background:none;}
 .prod-card:hover .prod-wishlist{opacity:1;}
 .prod-wishlist:hover{background:rgba(184,150,106,.1);border-color:var(--gold);color:var(--gold);}
 .prod-overlay{
-  position:absolute;inset:0;
+  position:absolute;inset:0;z-index:2;
   background:linear-gradient(to top, rgba(15,13,11,.92) 0%, transparent 50%);
   display:flex;flex-direction:column;justify-content:flex-end;padding:22px;
 }
@@ -1169,7 +1169,7 @@ footer{
   <!-- Featured Products -->
   <section class="section" style="padding-top:0">
     <div class="section-tag reveal">Editors' Picks</div>
-    <h2 class="section-h reveal reveal-delay-1">Top <em>Commission</em> Products</h2>
+    <h2 class="section-h reveal reveal-delay-1">Curated <em>Luxury</em> Products</h2>
     <div class="filter-bar reveal reveal-delay-2">
       <button class="filter-btn active" onclick="filterProducts(this,'all')">All Products</button>
       <button class="filter-btn" onclick="filterProducts(this,'bathtubs')">Bathtubs</button>
@@ -1198,16 +1198,6 @@ footer{
       <button class="btn-ghost reveal" style="padding:11px 24px;font-size:.7rem" onclick="navigate('editorial')">View All Articles</button>
     </div>
     <div class="editorial-grid" id="home-editorial"></div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="section testimonials-bg">
-    <div class="section-tag reveal" style="justify-content:center;margin-bottom:4px">Affiliate Success Stories</div>
-    <h2 class="section-h reveal reveal-delay-1" style="text-align:center">What Our <em>Affiliates</em> Say</h2>
-    <div class="testi-slider reveal reveal-delay-2">
-      <div class="testi-track" id="testi-track"></div>
-    </div>
-    <div class="testi-dots" id="testi-dots"></div>
   </section>
 
 
@@ -1447,6 +1437,10 @@ footer{
         <span id="article-readtime">—</span>
         <span class="article-ai-badge" id="article-ai-badge">✦ AI-Assisted Draft</span>
       </div>
+    </div>
+    <!-- Article hero image — shows when article has an image, hidden otherwise -->
+    <div id="article-hero-img-wrap" style="width:100%;max-width:860px;margin:0 auto 40px;border-radius:4px;overflow:hidden;display:none;">
+      <img id="article-hero-img" src="" alt="" style="width:100%;height:420px;object-fit:cover;display:block;" onerror="document.getElementById('article-hero-img-wrap').style.display='none'">
     </div>
     <div class="article-body-wrap">
       <div class="article-content" id="article-content"></div>
@@ -2050,7 +2044,7 @@ const PRODUCTS = [
   {id:'p1',link:'PASTE_AFFILIATE_LINK_HERE',amazonAsin:'B0764P3DXX',cat:'bathtubs',img:'',monogram:'K',emoji:'🛁',brand:'Kohler',name:'Underscore 72" Freestanding',model:'K-6367-0',price:'$4,299',raw:4299,comm:'12% commission · ~$516 per sale',commPct:'12%',rating:'4.9 (312 reviews)',desc:'The Underscore freestanding bath brings a refined aesthetic to any master bath. Its sloped backrest provides exceptional comfort while the clean-lined silhouette complements both traditional and contemporary bathrooms.',specs:[['Material','Premium enameled cast iron'],['Dimensions','72" x 36" x 20"'],['Faucet Holes','Deck-mounted, rim-mount'],['Weight','292 lbs'],['Finish','White / Biscuit / Almond'],['Warranty','Lifetime limited']],badge:'Best Seller',bg:'linear-gradient(135deg,#1A1410,#0E0C08)'},
   {id:'p2',link:'PASTE_AFFILIATE_LINK_HERE',cat:'bathtubs',img:'',monogram:'BU',emoji:'🛀',brand:'Bain Ultra',name:'Amma Thermomasseur Bath',model:'AMMA-6036',price:'$7,800',raw:7800,comm:'10% commission · ~$780 per sale',commPct:'10%',rating:'4.8 (187 reviews)',desc:'The Amma Thermomasseur combines chromotherapy, thermotherapy, and hydrotherapy in one extraordinary bath. BAIN ULTRA\'s exclusive technology maintains water temperature for up to 45 minutes of pure relaxation.',specs:[['Material','CRISTALITE® acrylic'],['Dimensions','60" x 36" x 23"'],['Jets','34 adjustable hydro jets'],['Features','Chromotherapy, thermotherapy'],['Power','120V / 15 amp'],['Warranty','10-year limited']],badge:'Editor\'s Pick',bg:'linear-gradient(135deg,#101820,#080E14)'},
   {id:'p3',link:'PASTE_AFFILIATE_LINK_HERE',cat:'bathtubs',img:'',monogram:'V+A',emoji:'✨',brand:'Victoria + Albert',name:'Ios Freestanding Bath',model:'IOS-N-SW-OF',price:'$12,500',raw:12500,comm:'8% commission · ~$1,000 per sale',commPct:'8%',rating:'5.0 (94 reviews)',desc:'Hand-crafted in England from QUARRYCAST® — a unique blend of volcanic limestone and high-performance resin — the Ios bath is both a functional masterpiece and a sculptural art form.',specs:[['Material','QUARRYCAST® volcanic limestone'],['Dimensions','67" x 31" x 22"'],['Weight','132 lbs'],['Origin','Hand-crafted in England'],['Finish','Over 190 color options'],['Warranty','25-year structural']],badge:'Luxury',bg:'linear-gradient(135deg,#1C1814,#100E0A)'},
-  {id:'p4',link:'PASTE_AFFILIATE_LINK_HERE',amazonAsin:'B07ZTL58VB'/* closest real match: GROHE Rainshower SmartActive 310 w/ thermostat, ref 26647000 \u2014 not identical to the fictional GRH-26250 model above */,cat:'showers',img:'',monogram:'G',emoji:'🚿',brand:'Grohe',name:'Rainshower System 360° Pro',model:'GRH-26250',price:'$3,200',raw:3200,comm:'14% commission · ~$448 per sale',commPct:'14%',rating:'4.7 (428 reviews)',desc:'The Grohe Rainshower 360° Pro delivers an immersive rainfall experience with a 14-inch overhead shower head, integrated thermostat control, and four adjustable side jets for a full-body spa experience.',specs:[['Head Diameter','14" (360mm)'],['Flow Rate','2.5 GPM'],['Spray Modes','RainShower, HandShower, Massage'],['Finish','StarLight Chrome / Brushed Nickel'],['Thermostat','Grohtherm 3000 included'],['Warranty','Lifetime on finish & function']],badge:'Top Commission',bg:'linear-gradient(135deg,#101818,#080E0E)'},
+  {id:'p4',link:'PASTE_AFFILIATE_LINK_HERE',amazonAsin:'B07ZTL58VB'/* closest real match: GROHE Rainshower SmartActive 310 w/ thermostat, ref 26647000 \u2014 not identical to the fictional GRH-26250 model above */,cat:'showers',img:'',monogram:'G',emoji:'🚿',brand:'Grohe',name:'Rainshower System 360° Pro',model:'GRH-26250',price:'$3,200',raw:3200,comm:'',commPct:'14%',rating:'4.7 (428 reviews)',desc:'The Grohe Rainshower 360° Pro delivers an immersive rainfall experience with a 14-inch overhead shower head, integrated thermostat control, and four adjustable side jets for a full-body spa experience.',specs:[['Head Diameter','14" (360mm)'],['Flow Rate','2.5 GPM'],['Spray Modes','RainShower, HandShower, Massage'],['Finish','StarLight Chrome / Brushed Nickel'],['Thermostat','Grohtherm 3000 included'],['Warranty','Lifetime on finish & function']],badge:'Top Pick',bg:'linear-gradient(135deg,#101818,#080E0E)'},
   {id:'p5',link:'PASTE_AFFILIATE_LINK_HERE',cat:'vanities',img:'',monogram:'D',emoji:'🪞',brand:'Duravit',name:'Starck 3 Vanity Suite',model:'ST3-1600',price:'$9,600',raw:9600,comm:'11% commission · ~$1,056 per sale',commPct:'11%',rating:'4.8 (156 reviews)',desc:'Philippe Starck\'s vision of the perfect vanity: drawer-fronts that are pure planes of matt lacquer, seamless integrated sink, and soft-close hardware throughout. Available in 12 Matt Lacquer finishes.',specs:[['Width','63" (1600mm)'],['Depth','19" (480mm)'],['Height','33" (850mm)'],['Finish','12 Matt Lacquer options'],['Sink','Integrated Vero basin'],['Designer','Philippe Starck']],badge:'Designer',bg:'linear-gradient(135deg,#181418,#100C10)'},
   {id:'p6',link:'PASTE_AFFILIATE_LINK_HERE',cat:'spa',img:'',monogram:'MTI',emoji:'🌿',brand:'MTI Baths',name:'Andrew Martin Spa Suite',model:'MTI-AM174',price:'$15,400',raw:15400,comm:'15% commission · ~$2,310 per sale',commPct:'15%',rating:'4.9 (63 reviews)',desc:'The Andrew Martin Air Bath represents the pinnacle of spa bathing. 92 micro air jets deliver a champagne-like effervescence across your entire body, with heated surface technology to keep the water temperature perfect.',specs:[['Air Jets','92 micro air jets'],['Surface Heating','Yes — maintains temp'],['Material','Lucite acrylic'],['Dimensions','74" x 42" x 24"'],['Chromotherapy','Yes — 14-color LED'],['Warranty','Lifetime structural']],badge:'Highest Earn',bg:'linear-gradient(135deg,#121810,#0A0E08)'},
   {id:'p7',link:'PASTE_AFFILIATE_LINK_HERE',cat:'smart',img:'',monogram:'K',emoji:'💡',brand:'Kohler',name:'Innate Intelligent Toilet',model:'K-5401-0',price:'$5,800',raw:5800,comm:'12% commission · ~$696 per sale',commPct:'12%',rating:'4.6 (211 reviews)',desc:'The Innate intelligent toilet features an integrated bidet with precision warm water cleansing, heated seat, auto deodorizer, automatic open/close lid, and hands-free flushing — all controlled by voice or app.',specs:[['Seat Heating','5 temperature levels'],['Water Heating','Tankless, instant warm'],['App Control','Kohler Konnect app'],['Voice','Alexa & Google compatible'],['Deodorizer','UV light + carbon filter'],['Warranty','3-year limited']],badge:'Smart Home',bg:'linear-gradient(135deg,#181610,#100E08)'},
@@ -2253,6 +2247,17 @@ function openArticle(id){
   document.getElementById('article-readtime').textContent=a.readTime;
   document.getElementById('article-ai-badge').style.display=a.aiAssisted?'inline-flex':'none';
   document.getElementById('article-content').innerHTML=renderArticleBody(a.body);
+  // Hero image — show if article has one, hide slot if not
+  const heroWrap = document.getElementById('article-hero-img-wrap');
+  const heroImg = document.getElementById('article-hero-img');
+  if(a.img){
+    heroImg.src = a.img;
+    heroImg.alt = a.title;
+    heroWrap.style.display = 'block';
+  } else {
+    heroWrap.style.display = 'none';
+    heroImg.src = '';
+  }
   navigate('article');
 }
 
