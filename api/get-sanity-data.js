@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
         *[_type == "product" && active == true] | order(order asc) {
           "id": _id,
           "cat": category,
-          "brand": brand->name,
+          "brand": coalesce(brand->name, brand),
           "monogram": monogram,
           name,
           model,
